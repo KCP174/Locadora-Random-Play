@@ -17,5 +17,6 @@ public class Main {
     public static void main(String[] args) {
         TelaJFrame ui = new TelaJFrame();
         ui.setVisible(true);
+        System.out.println("oi");
     }
 }
