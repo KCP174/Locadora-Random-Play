@@ -21,12 +21,12 @@ public class ClienteDAOImplPsql implements IClienteDAO {
     public void inserir(Cliente cliente) {
         banco.conectar();
         String sql = "INSERT INTO cliente (nome, cpf, endereco, data_nascimento, email) VALUES (";
-        sql = sql + "'" + cliente.getNome() + "',";
-        sql = sql + "'" + cliente.getCpf()+ "',";
-        sql = sql + "'" + cliente.getEndereco()+ "',";
-        sql = sql + "'" + cliente.getDataNasc() + "',";
-        sql = sql + "'" + cliente.getEmail()+ "'";
-        sql = sql + ");";
+        sql += "'" + cliente.getNome() + "',";
+        sql += "'" + cliente.getCpf()+ "',";
+        sql += "'" + cliente.getEndereco()+ "',";
+        sql += "'" + cliente.getDataNasc() + "',";
+        sql += "'" + cliente.getEmail()+ "'";
+        sql += ");";
         banco.executarSQL(sql);
         banco.fechar();
     }
@@ -140,7 +140,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
     public void atualizar(Cliente cliente) {
         banco.conectar();
         String sql = "UPDATE cliente SET nome = ?, cpf = ?, endereco = ?, data_nascimento = ?, email = ?";
-        sql = sql + " WHERE id = ?;";
+        sql += " WHERE id = ?;";
         List parametros = new ArrayList();
         parametros.add(cliente.getNome());
         parametros.add(cliente.getCpf());

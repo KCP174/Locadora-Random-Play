@@ -21,12 +21,12 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
     public void inserir(Funcionario funcionario) {
         banco.conectar();
         String sql = "INSERT INTO funcionario (nome, login, senha, data_nascimento, cpf) VALUES (";
-        sql = sql + "'" + funcionario.getNome() + "',";
-        sql = sql + "'" + funcionario.getLogin() + "',";
-        sql = sql + "'" + funcionario.getSenha() + "',";
-        sql = sql + "'" + funcionario.getDataNasc() + "',";
-        sql = sql + "'" + funcionario.getCpf()+ "'";
-        sql = sql + ");";
+        sql += "'" + funcionario.getNome() + "',";
+        sql += "'" + funcionario.getLogin() + "',";
+        sql += "'" + funcionario.getSenha() + "',";
+        sql += "'" + funcionario.getDataNasc() + "',";
+        sql += "'" + funcionario.getCpf()+ "'";
+        sql += ");";
         banco.executarSQL(sql);
         banco.fechar();
     }
@@ -123,7 +123,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
     public void atualizar(Funcionario funcionario) {
         banco.conectar();
         String sql = "UPDATE funcionario SET nome = ?, login = ?, senha = ?, data_nascimento = ?, cpf = ?";
-        sql = sql + " WHERE id = ?;";
+        sql += " WHERE id = ?;";
         List parametros = new ArrayList();
         parametros.add(funcionario.getNome());
         parametros.add(funcionario.getLogin());

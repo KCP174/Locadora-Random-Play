@@ -25,12 +25,12 @@ public class LocacaoDAOImplPsql implements ILocacao{
     public void inserir(Locacao locacao, List<ItemLocacao> itens) {
         banco.conectar();
         String sqlLocacao = "INSERT INTO locacao (data_locacao, data_devolucao, valor_total, id_cliente, id_funcionario) VALUES (";
-        sqlLocacao = sqlLocacao + "'" + locacao.getDataLocacao()+ "',";
-        sqlLocacao = sqlLocacao + "'" + locacao.getDataDevolucao()+ "',";
-        sqlLocacao = sqlLocacao + "'" + locacao.getValorTotal()+ "',";
-        sqlLocacao = sqlLocacao + "'" + locacao.getIdCliente()+ "',";
-        sqlLocacao = sqlLocacao + "'" + locacao.getIdFuncionario()+ "'";
-        sqlLocacao = sqlLocacao + ") RETURNING id;";
+        sqlLocacao += "'" + locacao.getDataLocacao()+ "',";
+        sqlLocacao += "'" + locacao.getDataDevolucao()+ "',";
+        sqlLocacao += "'" + locacao.getValorTotal()+ "',";
+        sqlLocacao += "'" + locacao.getIdCliente()+ "',";
+        sqlLocacao += "'" + locacao.getIdFuncionario()+ "'";
+        sqlLocacao += ") RETURNING id;";
         ResultSet rs = banco.executarConsulta(sqlLocacao);
         
         int ultimoId = -1;

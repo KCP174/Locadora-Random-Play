@@ -71,13 +71,13 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
     public void inserir(Filme filme) {
         banco.conectar();
         String sql = "INSERT INTO filme (titulo, autor, descricao, valor_locacao, qntd_estoque, duracao) VALUES (";
-        sql = sql + "'" + filme.getTitulo()+ "',";
-        sql = sql + "'" + filme.getAutor()+ "',";
-        sql = sql + "'" + filme.getDescricao()+ "',";
-        sql = sql + "'" + filme.getValorLocacao()+ "',";
-        sql = sql + "'" + filme.getQntdEstoque()+ "',";
-        sql = sql + "'" + filme.getDuracao()+ "'";
-        sql = sql + ") RETURNING id;";
+        sql += "'" + filme.getTitulo()+ "',";
+        sql += "'" + filme.getAutor()+ "',";
+        sql += "'" + filme.getDescricao()+ "',";
+        sql += "'" + filme.getValorLocacao()+ "',";
+        sql += "'" + filme.getQntdEstoque()+ "',";
+        sql += "'" + filme.getDuracao()+ "'";
+        sql += ") RETURNING id;";
         ResultSet rs = banco.executarConsulta(sql);
         
         int ultimoId = -1;
@@ -193,7 +193,7 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
     public void atualizar(Filme filme) {
         banco.conectar();
         String sql = "UPDATE filme SET titulo = ?, autor = ?, descricao = ?, valor_locacao = ?, qntd_estoque = ?, duracao = ?";
-        sql = sql + " WHERE id = ?;";
+        sql += " WHERE id = ?;";
         List parametros = new ArrayList();
         parametros.add(filme.getTitulo());
         parametros.add(filme.getAutor());

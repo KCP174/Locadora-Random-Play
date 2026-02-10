@@ -102,7 +102,7 @@ public class GeneroDAOImplPsql implements IGeneroDAO{
     public void atualizar(Genero genero) {
         banco.conectar();
         String sql = "UPDATE genero SET descricao = ?";
-        sql = sql + " WHERE id = ?;";
+        sql += " WHERE id = ?;";
         List parametros = new ArrayList();
         parametros.add(genero.getDescricao());
         parametros.add(genero.getId());
