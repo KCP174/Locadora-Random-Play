@@ -32,9 +32,9 @@ public class TelaJFrame extends javax.swing.JFrame {
 
     }
     
-    public void logar(String login){
+    public void logar(boolean adminPerm, String login){
         barraDeFerramentas.setVisible(true);
-        funcionarioJMenu.setVisible(login.equals("admin"));
+        funcionarioJMenu.setVisible(adminPerm);
         logadoJMenuItem.setText("Logado como: " + login);
         openHome();
     }

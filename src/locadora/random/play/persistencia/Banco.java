@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 public class Banco {
     
     private Connection conexao;
-    private String url = "jdbc:postgresql://localhost:5432/random-play";
+    private String url = "jdbc:postgresql://localhost:5432/random_play";
     private String user = "postgres";
     private String password = "123456";
     

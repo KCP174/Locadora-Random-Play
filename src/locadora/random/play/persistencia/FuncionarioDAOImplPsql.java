@@ -20,12 +20,13 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
     @Override
     public void inserir(Funcionario funcionario) {
         banco.conectar();
-        String sql = "INSERT INTO funcionario (nome, login, senha, data_nascimento, cpf) VALUES (";
+        String sql = "INSERT INTO funcionario (nome, login, senha, data_nascimento, cpf, admin) VALUES (";
         sql += "'" + funcionario.getNome() + "',";
         sql += "'" + funcionario.getLogin() + "',";
         sql += "'" + funcionario.getSenha() + "',";
         sql += "'" + funcionario.getDataNasc() + "',";
-        sql += "'" + funcionario.getCpf()+ "'";
+        sql += "'" + funcionario.getCpf()+ "',";
+        sql += "'" + funcionario.isAdminPerm()+ "'";
         sql += ");";
         banco.executarSQL(sql);
         banco.fechar();
@@ -38,7 +39,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         ResultSet rs = banco.executarConsulta(sql);
         try {
             if(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 return registro;
             }
@@ -59,7 +60,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         
         try {
             while(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -82,7 +83,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         
         try {
             while(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -106,7 +107,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         
         try {
             while(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -122,7 +123,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
     @Override
     public void atualizar(Funcionario funcionario) {
         banco.conectar();
-        String sql = "UPDATE funcionario SET nome = ?, login = ?, senha = ?, data_nascimento = ?, cpf = ?";
+        String sql = "UPDATE funcionario SET nome = ?, login = ?, senha = ?, data_nascimento = ?, cpf = ?, admin = ?";
         sql += " WHERE id = ?;";
         List parametros = new ArrayList();
         parametros.add(funcionario.getNome());
@@ -130,6 +131,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         parametros.add(funcionario.getSenha());
         parametros.add(funcionario.getDataNasc());
         parametros.add(funcionario.getCpf());
+        parametros.add(funcionario.isAdminPerm());
         parametros.add(funcionario.getId());
         
         banco.executarPreparedStatement(sql, parametros);

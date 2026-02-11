@@ -4,9 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/Main.java</file>
-            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/ui/TelaJFrame.java</file>
-            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/ui/LoginJPanel.java</file>
-            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/ui/HomeJPanel.java</file>
+            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/persistencia/FilmeDAOImplPsql.java</file>
+            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/persistencia/FuncionarioDAOImplPsql.java</file>
+            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/persistencia/GeneroDAOImplPsql.java</file>
+            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/persistencia/IClienteDAO.java</file>
+            <file>file:/C:/Users/kauan/OneDrive/Documentos/NetBeansProjects/locadora-random-play/src/locadora/random/play/persistencia/LocacaoDAOImplPsql.java</file>
         </group>
     </open-files>
 </project-private>

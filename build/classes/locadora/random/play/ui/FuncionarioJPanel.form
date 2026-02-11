@@ -107,6 +107,7 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="cancelarJButton" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="tituloJLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="senhaJLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -114,32 +115,39 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="loginJTextField" pref="134" max="32767" attributes="0"/>
-                          <Component id="senhaJTextField" max="32767" attributes="0"/>
+                          <Component id="loginJTextField" max="32767" attributes="0"/>
+                          <Component id="senhaJTextField" min="-2" pref="134" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="tituloJLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="perfilJCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="78" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="atualizarJButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
-                      <Component id="editarJButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="excluirJButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="425" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="buscaJTextField" min="-2" pref="189" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buscarJButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                              <Component id="buscaJTextField" min="-2" pref="189" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="buscarJButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="atualizarJButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
+                              <Component id="editarJButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="excluirJButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="492" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -170,7 +178,7 @@
                           <Component id="dataNascJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="dataNascJFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="loginJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="loginJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -180,7 +188,9 @@
                           <Component id="senhaJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="senhaJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="perfilJCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cadastrarJButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cancelarJButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -301,17 +311,23 @@
         <Component class="javax.swing.JTable" name="funcionariosJTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="7" rowCount="4">
                 <Column editable="false" title="ID" type="java.lang.Object"/>
                 <Column editable="false" title="Nome" type="java.lang.Object"/>
                 <Column editable="false" title="CPF" type="java.lang.Object"/>
                 <Column editable="false" title="Data Nasc" type="java.lang.Object"/>
                 <Column editable="false" title="Login" type="java.lang.Object"/>
                 <Column editable="false" title="Senha" type="java.lang.Object"/>
+                <Column editable="false" title="Admin" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -387,6 +403,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="atualizarJButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="perfilJCheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Perfil Administrador"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

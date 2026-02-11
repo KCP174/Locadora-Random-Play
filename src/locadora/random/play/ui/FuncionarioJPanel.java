@@ -31,13 +31,14 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
         List<Funcionario> lista = banco.consultar();
         lista.remove(0);
         for (Funcionario funcionario : lista) {
-            Object[] linha = new Object[6];
+            Object[] linha = new Object[7];
             linha[0] = funcionario.getId();
             linha[1] = funcionario.getNome();
             linha[2] = funcionario.getCpf();
             linha[3] = funcionario.getDataNasc();
             linha[4] = funcionario.getLogin();
             linha[5] = funcionario.getSenha();
+            linha[6] = funcionario.isAdminPerm();
             dfm.addRow(linha);
         }
     }
@@ -50,13 +51,14 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
             lista.remove(0);
         }
         for (Funcionario funcionario : lista) {
-            Object[] linha = new Object[6];
+            Object[] linha = new Object[7];
             linha[0] = funcionario.getId();
             linha[1] = funcionario.getNome();
             linha[2] = funcionario.getCpf();
             linha[3] = funcionario.getDataNasc();
             linha[4] = funcionario.getLogin();
             linha[5] = funcionario.getSenha();
+            linha[6] = funcionario.isAdminPerm();
             dfm.addRow(linha);
         }
     }
@@ -95,6 +97,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
         editarJButton = new javax.swing.JButton();
         excluirJButton = new javax.swing.JButton();
         atualizarJButton = new javax.swing.JButton();
+        perfilJCheckBox = new javax.swing.JCheckBox();
 
         confirmaExclJDialog.setSize(new java.awt.Dimension(330, 190));
 
@@ -172,17 +175,17 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
 
         funcionariosJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "CPF", "Data Nasc", "Login", "Senha"
+                "ID", "Nome", "CPF", "Data Nasc", "Login", "Senha", "Admin"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -204,6 +207,8 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
 
         atualizarJButton.setText("Atualizar");
         atualizarJButton.addActionListener(this::atualizarJButtonActionPerformed);
+
+        perfilJCheckBox.setText("Perfil Administrador");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -230,31 +235,37 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
                         .addComponent(cadastrarJButton)
                         .addGap(37, 37, 37)
                         .addComponent(cancelarJButton))
+                    .addComponent(tituloJLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(senhaJLabel)
                             .addComponent(loginJLabel))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(loginJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                            .addComponent(senhaJTextField)))
-                    .addComponent(tituloJLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                            .addComponent(loginJTextField)
+                            .addComponent(senhaJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(perfilJCheckBox))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(atualizarJButton)
-                        .addGap(187, 187, 187)
-                        .addComponent(editarJButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(excluirJButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(buscaJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(buscarJButton)
-                            .addGap(71, 71, 71))))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(buscaJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buscarJButton)
+                                .addGap(89, 89, 89))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(atualizarJButton)
+                                .addGap(187, 187, 187)
+                                .addComponent(editarJButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(excluirJButton)
+                                .addContainerGap())))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 18, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +290,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dataNascJLabel)
                             .addComponent(dataNascJFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(loginJLabel)
                             .addComponent(loginJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -287,7 +298,9 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(senhaJLabel)
                             .addComponent(senhaJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
+                        .addComponent(perfilJCheckBox)
+                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cadastrarJButton)
                             .addComponent(cancelarJButton)))
@@ -313,7 +326,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
 
     private void cadastrarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarJButtonActionPerformed
         try {
-        Funcionario novoFuncionario = new Funcionario(nomeJTextField.getText(), loginJTextField.getText(), senhaJTextField.getText(), dataNascJFormattedTextField.getText(), cpfJFormattedTextField.getText());
+        Funcionario novoFuncionario = new Funcionario(nomeJTextField.getText(), loginJTextField.getText(), senhaJTextField.getText(), dataNascJFormattedTextField.getText(), cpfJFormattedTextField.getText(), perfilJCheckBox.isSelected());
         String idStr = idJTextField.getText();  
             try {
                 int id = Integer.parseInt(idStr);
@@ -405,6 +418,9 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
             
             Object senha = funcionariosJTable.getValueAt(linha, 5);
             senhaJTextField.setText(senha.toString());
+           
+            Object admin = funcionariosJTable.getValueAt(linha, 6);
+            perfilJCheckBox.setSelected((boolean) admin);
             
         } else{
             JOptionPane.showMessageDialog(editarJButton, "Selecione 1 funcionário!");
@@ -455,6 +471,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
     private javax.swing.JButton naoJButton;
     private javax.swing.JLabel nomeJLabel;
     private javax.swing.JTextField nomeJTextField;
+    private javax.swing.JCheckBox perfilJCheckBox;
     private javax.swing.JLabel senhaJLabel;
     private javax.swing.JTextField senhaJTextField;
     private javax.swing.JButton simJButton;

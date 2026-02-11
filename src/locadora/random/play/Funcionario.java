@@ -12,16 +12,26 @@ public class Funcionario extends Pessoa{
     
     private String login;
     private String senha;
+    private boolean adminPerm;
 
     public Funcionario() {
     }
     
-    public Funcionario(String nome, String login, String senha, String dataNasc, String cpf) {
+    public Funcionario(String nome, String login, String senha, String dataNasc, String cpf, boolean adminPerm) {
         setNome(nome);
         setDataNasc(dataNasc);
         setCpf(cpf);
         this.login = login;
         this.senha = senha;
+        this.adminPerm = adminPerm;
+    }
+
+    public boolean isAdminPerm() {
+        return adminPerm;
+    }
+
+    public void setAdminPerm(boolean adminPerm) {
+        this.adminPerm = adminPerm;
     }
 
     public String getLogin() {
