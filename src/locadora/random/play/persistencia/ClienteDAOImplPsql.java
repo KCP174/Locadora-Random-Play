@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import locadora.random.play.Cliente;
 import java.sql.ResultSet;
+import java.util.NoSuchElementException;
+import locadora.random.play.Locacao;
 
 /**
  *
@@ -16,6 +18,7 @@ import java.sql.ResultSet;
 public class ClienteDAOImplPsql implements IClienteDAO {
     
     private Banco banco = new Banco();
+    private LocacaoDAOImplPsql bancoLocacoes = new LocacaoDAOImplPsql();
 
     @Override
     public void inserir(Cliente cliente) {
@@ -74,7 +77,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         List<Cliente> lista = new ArrayList<>();
         banco.conectar();
         String sql = "SELECT * FROM cliente ORDER BY id LIMIT ";
-        sql += n;
+        sql += n + ";";
         ResultSet rs = banco.executarConsulta(sql);
         
         try {
@@ -93,7 +96,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
     }
     
     @Override
-    public List<Cliente> buscar(String nome) {
+    public List<Cliente> buscarNome(String nome) {
         List<Cliente> lista = new ArrayList<>();
         banco.conectar();
         String sql = "SELECT *, nome ILIKE '%" + nome + "%' ";
@@ -116,7 +119,8 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         return lista;
     }
     
-    public Cliente buscarCpf(String cpf) {
+    @Override
+    public Cliente buscarPorCpf(String cpf) {
         Cliente registro = null;
         banco.conectar();
         String sql = "SELECT * FROM cliente WHERE cpf = '" + cpf + "';";
@@ -156,8 +160,17 @@ public class ClienteDAOImplPsql implements IClienteDAO {
     @Override
     public void remover(Cliente cliente) {
         banco.conectar();
-        String sql = "DELETE FROM cliente WHERE id = " + cliente.getId() + ";";
-        banco.executarSQL(sql);
+        //Verifica se o cliente tem locações ativas e impede a remoção caso tenha.
+        List<Locacao> locacoesCliente = bancoLocacoes.consultarLocacoesAtivasDoCliente(cliente.getId());
+        try{
+            //getFirst() da um throw caso não tenha o primeiro elemento
+            locacoesCliente.getFirst();
+            throw new RuntimeException("Cliente ainda tem locações ativas!");
+        }catch (NoSuchElementException e){ 
+            String sql = "DELETE FROM cliente WHERE id = " + cliente.getId() + ";";
+            banco.executarSQL(sql);
+        }
+        
         banco.fechar();
     }
 

@@ -106,7 +106,7 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         DefaultTableModel dfm = (DefaultTableModel) clientesJTable.getModel();
         dfm.setRowCount(0);
         
-        List<Cliente> lista = bancoCliente.buscar(nome);
+        List<Cliente> lista = bancoCliente.buscarNome(nome);
         for (Cliente cliente : lista) {
             Object[] linha = new Object[3];
             linha[0] = cliente.getId();
@@ -176,7 +176,7 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         valorTotalJLabel = new javax.swing.JLabel();
         valorTotalJTextField = new javax.swing.JTextField();
         carrinhoJLabel = new javax.swing.JLabel();
-        limparJButton = new javax.swing.JButton();
+        limparCarrinhoJButton = new javax.swing.JButton();
         diasJLabel = new javax.swing.JLabel();
         diasJSpinner = new javax.swing.JSpinner();
         dataLocacaoJLabel = new javax.swing.JLabel();
@@ -184,6 +184,7 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         dataDevolucaoJFormattedTextField = new javax.swing.JFormattedTextField();
         dataLocacaoJFormattedTextField = new javax.swing.JFormattedTextField();
+        limparBuscaJButton = new javax.swing.JButton();
 
         confirmaExclJDialog.setSize(new java.awt.Dimension(330, 190));
 
@@ -344,8 +345,8 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         carrinhoJLabel.setText("CARRINHO");
         carrinhoJLabel.setToolTipText("");
 
-        limparJButton.setText("Limpar");
-        limparJButton.addActionListener(this::limparJButtonActionPerformed);
+        limparCarrinhoJButton.setText("Limpar Carrinho");
+        limparCarrinhoJButton.addActionListener(this::limparCarrinhoJButtonActionPerformed);
 
         diasJLabel.setText("Qntd Dias:");
 
@@ -382,14 +383,17 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         dataLocacaoJFormattedTextField.setFocusable(false);
         dataLocacaoJFormattedTextField.addActionListener(this::dataLocacaoJFormattedTextFieldActionPerformed);
 
+        limparBuscaJButton.setText("Limpar Buscas");
+        limparBuscaJButton.addActionListener(this::limparBuscaJButtonActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(84, 84, 84)
                 .addComponent(buscaClienteJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(buscaClienteJButton)
                 .addGap(43, 43, 43)
                 .addComponent(tituloJLabel)
@@ -409,11 +413,24 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(limparBuscaJButton)
+                        .addGap(18, 18, 18)
                         .addComponent(adicionarJButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(valorTotalJLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(valorTotalJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(finalizarJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(carrinhoJLabel)
+                        .addGap(101, 101, 101)
+                        .addComponent(limparCarrinhoJButton))
+                    .addComponent(removerJButton)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(dataLocacaoJFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -427,18 +444,7 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(diasJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(diasJSpinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(valorTotalJLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(valorTotalJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(finalizarJButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(carrinhoJLabel)
-                        .addGap(101, 101, 101)
-                        .addComponent(limparJButton))
-                    .addComponent(removerJButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(diasJSpinner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -461,7 +467,7 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(limparJButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(limparCarrinhoJButton, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(carrinhoJLabel))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -489,7 +495,8 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
                     .addComponent(adicionarJButton)
                     .addComponent(finalizarJButton)
                     .addComponent(valorTotalJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valorTotalJLabel))
+                    .addComponent(valorTotalJLabel)
+                    .addComponent(limparBuscaJButton))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -566,13 +573,13 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         confirmaExclJDialog.setVisible(false);
     }//GEN-LAST:event_naoExclJButtonActionPerformed
 
-    private void limparJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparJButtonActionPerformed
+    private void limparCarrinhoJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCarrinhoJButtonActionPerformed
         if (carrinho.isEmpty()){
-            JOptionPane.showMessageDialog(limparJButton, "Carrinho está vazio!");
+            JOptionPane.showMessageDialog(limparCarrinhoJButton, "Carrinho está vazio!");
         }else{
             confirmaLimparJDialog.setVisible(true);
         }
-    }//GEN-LAST:event_limparJButtonActionPerformed
+    }//GEN-LAST:event_limparCarrinhoJButtonActionPerformed
 
     private void finalizarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizarJButtonActionPerformed
         calculaDias(true);
@@ -628,6 +635,14 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         confirmaLimparJDialog.setVisible(false);
     }//GEN-LAST:event_naoLimparJButtonActionPerformed
 
+    private void limparBuscaJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparBuscaJButtonActionPerformed
+        // TODO add your handling code here:
+        buscaClienteJTextField.setText("");
+        buscaFilmeJTextField.setText("");
+        carregarTabelaClientes();
+        carregarTabelaFilmes();
+    }//GEN-LAST:event_limparBuscaJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionarJButton;
@@ -652,7 +667,8 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton limparJButton;
+    private javax.swing.JButton limparBuscaJButton;
+    private javax.swing.JButton limparCarrinhoJButton;
     private javax.swing.JButton naoExclJButton;
     private javax.swing.JButton naoLimparJButton;
     private javax.swing.JButton removerJButton;

@@ -38,7 +38,7 @@ public class DevolucaoJPanel extends javax.swing.JPanel {
     private void carregarTabelaLocacoesCliente(){
         DefaultTableModel dfm = (DefaultTableModel) locacoesJTable.getModel();
         dfm.setRowCount(0);
-        cliente = bancoCliente.buscarCpf(cpfJFormattedTextField.getText());
+        cliente = bancoCliente.buscarPorCpf(cpfJFormattedTextField.getText());
         List<Locacao> lista = new ArrayList<>();
         if (cliente != null){
             lista = bancoLocacao.consultarLocacoesAtivasDoCliente(cliente.getId());

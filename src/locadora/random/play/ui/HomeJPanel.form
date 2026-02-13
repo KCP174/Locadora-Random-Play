@@ -18,8 +18,20 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
-              <Component id="tituloLoginJLabel" min="-2" pref="440" max="-2" attributes="0"/>
-              <EmptySpace pref="212" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="filmeJButton" min="-2" pref="186" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="devolverJButton" min="-2" pref="186" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="clienteJButton" min="-2" pref="186" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="locacaoJButton" min="-2" pref="186" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="tituloLoginJLabel" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="231" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -28,7 +40,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               <Component id="tituloLoginJLabel" min="-2" pref="42" max="-2" attributes="0"/>
-              <EmptySpace pref="386" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="locacaoJButton" alignment="3" min="-2" pref="98" max="-2" attributes="0"/>
+                  <Component id="clienteJButton" alignment="3" min="-2" pref="98" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="devolverJButton" alignment="3" min="-2" pref="98" max="-2" attributes="0"/>
+                  <Component id="filmeJButton" alignment="3" min="-2" pref="98" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="154" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,6 +63,38 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Bem Vindo ao Sistema Random Play!"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="locacaoJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nova Loca&#xe7;&#xe3;o"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="locacaoJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="filmeJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar Filme"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filmeJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="devolverJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Devolver Filme"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="devolverJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="clienteJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cadastrar Cliente"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clienteJButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

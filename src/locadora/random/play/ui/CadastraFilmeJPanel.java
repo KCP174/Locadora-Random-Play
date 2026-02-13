@@ -41,18 +41,23 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
     }
     
     private void adicionaGenero(Genero generoNovo){
-        if (generosSelecionados.contains(generoNovo)){
-            throw new RuntimeException("Gênero já foi adicionado");
-        }else{
-            generosSelecionados.add(generoNovo);
-        }
+        for(Genero g : generosSelecionados)
+            if (g.getId() == generoNovo.getId()){
+                throw new RuntimeException("Gênero já foi adicionado");
+            }
+        generosSelecionados.add(generoNovo);
     }
     
     private void removeGenero(Genero generoARemover){
-        if (!generosSelecionados.contains(generoARemover)){
-            throw new RuntimeException("Gênero não foi adicionado");
-        }else{
-            generosSelecionados.remove(generoARemover);
+        boolean rmv = false;
+        for(Genero g : generosSelecionados)
+            if (g.getId() == generoARemover.getId()){
+                generosSelecionados.remove(g);
+                rmv = true;
+                break;
+            }
+        if(!rmv){
+            throw new RuntimeException("Gênero não foi adicionado!");    
         }
     }
     
@@ -395,6 +400,7 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
 
     private void cadastrarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarJButtonActionPerformed
         try {
+            //conversão
             String textoValor = valorJTextField.getText();
             textoValor = textoValor.replace(",", ".");
             double valor = Double.parseDouble(textoValor);
@@ -404,6 +410,7 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
             
             String textoQuantidade = qntdJTextField.getText();
             int qntd = Integer.parseInt(textoQuantidade);
+            
             Filme novoFilme = new Filme(tituloJTextField.getText(), autorJTextField.getText(), descricaoJTextField.getText(), valor, qntd, duracao, generosSelecionados);
             String idStr = idJTextField.getText();  
             try {
@@ -413,7 +420,7 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(cadastrarJButton, "Filme atualizado!");  
                 cancelarJButtonActionPerformed(evt);
             } catch(NumberFormatException erro){
-            //Verificar se o filme já está no sistema
+                //Verificar se o filme já está no sistema
                 List<Filme> listaFilme = bancoFilme.consultar(false);
                 String titulo = novoFilme.getTitulo();
                 boolean cadastrado = false;
@@ -423,15 +430,14 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
                     cadastrado = true;
                     break;
                 }
-            }        
-            //Fim verificaçõa
-            if (!cadastrado){
-                bancoFilme.inserir(novoFilme);
-                JOptionPane.showMessageDialog(cadastrarJButton, "Filme cadastrado com sucesso!");
-                cancelarJButtonActionPerformed(evt);
-            }}
-        
-            } catch(Exception erro) {
+            }
+                //Fim verificação
+                if (!cadastrado){
+                    bancoFilme.inserir(novoFilme);
+                    JOptionPane.showMessageDialog(cadastrarJButton, "Filme cadastrado com sucesso!");
+                    cancelarJButtonActionPerformed(evt);
+                }
+            }} catch(Exception erro) {
             erro.printStackTrace();
             JOptionPane.showMessageDialog(cadastrarJButton, erro.getMessage());
         }
@@ -499,8 +505,8 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
             valorJTextField.setText(String.valueOf(f.getValorLocacao()));
             qntdJTextField.setText(String.valueOf(f.getQntdEstoque()));
             
-            //generosSelecionados = f.getGenerosFilme();
-            //mostraGeneros();
+            generosSelecionados = f.getGenerosFilme();
+            mostraGeneros();
             
         } else{
             JOptionPane.showMessageDialog(editarJButton, "Selecione 1 cliente!");

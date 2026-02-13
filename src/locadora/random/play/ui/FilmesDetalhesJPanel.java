@@ -78,6 +78,7 @@ public class FilmesDetalhesJPanel extends javax.swing.JPanel {
         buscarJButton = new javax.swing.JButton();
         buscarJTextField = new javax.swing.JTextField();
         emEstoqueJCheckBox = new javax.swing.JCheckBox();
+        limparJButton = new javax.swing.JButton();
 
         filmesJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,23 +110,31 @@ public class FilmesDetalhesJPanel extends javax.swing.JPanel {
         emEstoqueJCheckBox.setText("Mostrar Apenas em estoque");
         emEstoqueJCheckBox.addActionListener(this::emEstoqueJCheckBoxActionPerformed);
 
+        limparJButton.setText("Limpar");
+        limparJButton.addActionListener(this::limparJButtonActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(332, 332, 332)
-                .addComponent(tituloJLabel1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(273, 273, 273)
-                .addComponent(buscarJLabel)
-                .addGap(18, 18, 18)
-                .addComponent(buscarJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buscarJButton)
-                .addGap(18, 18, 18)
-                .addComponent(emEstoqueJCheckBox))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(332, 332, 332)
+                        .addComponent(tituloJLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(buscarJLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(buscarJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buscarJButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(emEstoqueJCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(limparJButton)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +146,8 @@ public class FilmesDetalhesJPanel extends javax.swing.JPanel {
                     .addComponent(buscarJLabel)
                     .addComponent(buscarJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarJButton)
-                    .addComponent(emEstoqueJCheckBox))
+                    .addComponent(emEstoqueJCheckBox)
+                    .addComponent(limparJButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -159,6 +169,12 @@ public class FilmesDetalhesJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_emEstoqueJCheckBoxActionPerformed
 
+    private void limparJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparJButtonActionPerformed
+        // TODO add your handling code here:
+        buscarJTextField.setText("");
+        carregarTabelaFilmes(emEstoqueJCheckBox.isSelected());
+    }//GEN-LAST:event_limparJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarJButton;
@@ -167,6 +183,7 @@ public class FilmesDetalhesJPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox emEstoqueJCheckBox;
     private javax.swing.JTable filmesJTable;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JButton limparJButton;
     private javax.swing.JLabel tituloJLabel1;
     // End of variables declaration//GEN-END:variables
 }

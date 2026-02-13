@@ -56,7 +56,7 @@ public class GeneroDAOImplPsql implements IGeneroDAO{
         List<Genero> lista = new ArrayList<>();
         banco.conectar();
         String sql = "SELECT * FROM genero ORDER BY id LIMIT ";
-        sql += n;
+        sql += n + ";";
         ResultSet rs = banco.executarConsulta(sql);
         
         try {
@@ -111,10 +111,14 @@ public class GeneroDAOImplPsql implements IGeneroDAO{
         banco.fechar();
     }
 
+    //Tá implementado mas não é utilizado no sistema
+    //A ideia seria a de que Gêneros não sejam apagados do sistema
     @Override
     public void remover(Genero genero) {
-        banco.conectar();
-        String sql = "DELETE FROM genero WHERE id = " + genero.getId() + ";";
+        banco.conectar();        
+        String sql = "DELETE FROM generos_filme WHERE id_genero = " + genero.getId() + ";";
+        banco.executarSQL(sql);
+        sql = "DELETE FROM genero WHERE id = " + genero.getId() + ";";
         banco.executarSQL(sql);
         banco.fechar();
     }

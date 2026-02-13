@@ -161,10 +161,11 @@ public class GeneroJPanel extends javax.swing.JPanel {
                     int id = Integer.parseInt(idStr);
                     novoGenero.setId(id);
                     banco.atualizar(novoGenero);
+                    JOptionPane.showMessageDialog(adicionarJButton, "Gênero atualizado com sucesso!");                    
             } catch(NumberFormatException erro){
                 banco.inserir(novoGenero);
-            }
                 JOptionPane.showMessageDialog(adicionarJButton, "Gênero inserido com sucesso!");
+            }
                 descricaoJTextField.setText("");
                 idJTextField.setText("");
             }} catch(Exception erro) {

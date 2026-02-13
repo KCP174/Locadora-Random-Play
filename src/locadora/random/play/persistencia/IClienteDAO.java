@@ -21,9 +21,9 @@ public interface IClienteDAO {
     
     public List<Cliente> consultarLimitado(int n);
     
-    public List<Cliente> buscar(String nome);
+    public List<Cliente> buscarNome(String nome);
     
-    public Cliente buscarCpf(String cpf);
+    public Cliente buscarPorCpf(String cpf);
     
     public void atualizar(Cliente cliente);
     

@@ -24,6 +24,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
         initComponents();
         carregarTabela();
     }
+    //É implementado de uma forma a qual o admin principal só pode ser alterado diretamente no banco
     private void carregarTabela(){
         DefaultTableModel dfm = (DefaultTableModel) funcionariosJTable.getModel();
         dfm.setRowCount(0);
@@ -42,14 +43,17 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
             dfm.addRow(linha);
         }
     }
+
     private void resultaBuscaNome(String nome){
         DefaultTableModel dfm = (DefaultTableModel) funcionariosJTable.getModel();
         dfm.setRowCount(0);
-        
+    
+        //É implementado de uma forma a qual o admin principal só pode ser alterado diretamente no banco
         List<Funcionario> lista = banco.buscar(nome);
-        if (lista.get(0).getNome().equals("admin")){
+        if (!lista.isEmpty() && lista.get(0).getNome().equals("admin")){
             lista.remove(0);
         }
+        
         for (Funcionario funcionario : lista) {
             Object[] linha = new Object[7];
             linha[0] = funcionario.getId();

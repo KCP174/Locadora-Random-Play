@@ -10,11 +10,13 @@ package locadora.random.play.ui;
  */
 public class HomeJPanel extends javax.swing.JPanel {
 
+    private TelaJFrame tela;
     /**
      * Creates new form HomeJPanel
      */
-    public HomeJPanel() {
+    public HomeJPanel(TelaJFrame tela) {
         initComponents();
+        this.tela = tela;
     }
 
     /**
@@ -27,9 +29,25 @@ public class HomeJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         tituloLoginJLabel = new javax.swing.JLabel();
+        locacaoJButton = new javax.swing.JButton();
+        filmeJButton = new javax.swing.JButton();
+        devolverJButton = new javax.swing.JButton();
+        clienteJButton = new javax.swing.JButton();
 
         tituloLoginJLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         tituloLoginJLabel.setText("Bem Vindo ao Sistema Random Play!");
+
+        locacaoJButton.setText("Nova Locação");
+        locacaoJButton.addActionListener(this::locacaoJButtonActionPerformed);
+
+        filmeJButton.setText("Buscar Filme");
+        filmeJButton.addActionListener(this::filmeJButtonActionPerformed);
+
+        devolverJButton.setText("Devolver Filme");
+        devolverJButton.addActionListener(this::devolverJButtonActionPerformed);
+
+        clienteJButton.setText("Cadastrar Cliente");
+        clienteJButton.addActionListener(this::clienteJButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -37,20 +55,65 @@ public class HomeJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(207, 207, 207)
-                .addComponent(tituloLoginJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(filmeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(devolverJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(clienteJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(locacaoJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tituloLoginJLabel))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(tituloLoginJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(locacaoJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clienteJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(devolverJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filmeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void locacaoJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locacaoJButtonActionPerformed
+        // TODO add your handling code here:]
+        NovaLocacaoJPanel jpanel = new NovaLocacaoJPanel();
+        tela.abreAtalho(jpanel);
+    }//GEN-LAST:event_locacaoJButtonActionPerformed
+
+    private void clienteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteJButtonActionPerformed
+        // TODO add your handling code here:
+        CadastraClienteJPanel jpanel = new CadastraClienteJPanel();
+        tela.abreAtalho(jpanel);
+    }//GEN-LAST:event_clienteJButtonActionPerformed
+
+    private void filmeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filmeJButtonActionPerformed
+        // TODO add your handling code here:
+        FilmesDetalhesJPanel jpanel = new FilmesDetalhesJPanel();
+        tela.abreAtalho(jpanel);
+    }//GEN-LAST:event_filmeJButtonActionPerformed
+
+    private void devolverJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_devolverJButtonActionPerformed
+        // TODO add your handling code here:
+        DevolucaoJPanel jpanel = new DevolucaoJPanel();
+        tela.abreAtalho(jpanel);
+    }//GEN-LAST:event_devolverJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clienteJButton;
+    private javax.swing.JButton devolverJButton;
+    private javax.swing.JButton filmeJButton;
+    private javax.swing.JButton locacaoJButton;
     private javax.swing.JLabel tituloLoginJLabel;
     // End of variables declaration//GEN-END:variables
 }

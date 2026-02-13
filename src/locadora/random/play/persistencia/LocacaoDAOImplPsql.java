@@ -17,6 +17,7 @@ import locadora.random.play.Locacao;
  *
  * @author kauan
  */
+//Essa classe implementa também o DAO da clase ItemLocacao
 public class LocacaoDAOImplPsql implements ILocacao{
     private Banco banco = new Banco();
     
@@ -110,6 +111,7 @@ public class LocacaoDAOImplPsql implements ILocacao{
     
     @Override
     public List<Locacao> consultarLocacoesDoCliente(int idCliente) {
+        banco.conectar();
         List<Locacao> lista = new ArrayList<>();
         String sql = "SELECT * FROM locacao WHERE id_cliente = '" + idCliente + "' ORDER BY id;";
         ResultSet rs = banco.executarConsulta(sql);
@@ -127,7 +129,7 @@ public class LocacaoDAOImplPsql implements ILocacao{
             erro.printStackTrace();
             throw new RuntimeException(erro);
         }
-        
+        banco.fechar();
         return lista;
     }
     
@@ -272,8 +274,10 @@ public class LocacaoDAOImplPsql implements ILocacao{
         return lista;
     }
 
+    //Consulta usando id da Locação
     @Override
     public List<ItemLocacao> consultarFilmesLocadosLocacao(int id) {
+        banco.conectar();
         List<ItemLocacao> lista = new ArrayList<>();
         String sql = "SELECT * FROM itens_locacao WHERE id_locacao = '" + id + "' ORDER BY id;";
         ResultSet rs = banco.executarConsulta(sql);
@@ -286,8 +290,8 @@ public class LocacaoDAOImplPsql implements ILocacao{
         }catch (Exception erro){
             erro.printStackTrace();
             throw new RuntimeException(erro);
-        }
-        
+        }                
+        banco.fechar();
         return lista;
     }
 

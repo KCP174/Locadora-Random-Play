@@ -16,6 +16,8 @@ public interface IFilmeDAO {
         
     public Filme buscaId(int i);
     
+    public List<Genero> retornaGeneros(int idFilme);
+    
     public void inserir(Filme filme);
     
     public List<Filme> consultar(boolean emEstoque);

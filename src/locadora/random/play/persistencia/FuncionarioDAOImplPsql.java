@@ -35,8 +35,12 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
     @Override
     public Funcionario logar(String login, String senha) {
         banco.conectar();
-        String sql = "SELECT * FROM funcionario WHERE login = '" + login + "' AND senha = '" + senha + "';";
-        ResultSet rs = banco.executarConsulta(sql);
+        String sql = "SELECT * FROM funcionario WHERE login = ? AND senha = ?;";
+        List parametros = new ArrayList();
+        parametros.add(login);
+        parametros.add(senha);
+        
+        ResultSet rs = banco.executarPreparedStatementRetornando(sql, parametros);
         try {
             if(rs.next()){
                 Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
@@ -78,7 +82,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         List<Funcionario> lista = new ArrayList<>();
         banco.conectar();
         String sql = "SELECT * FROM funcionario ORDER BY id LIMIT ";
-        sql += n;
+        sql += n + ";";
         ResultSet rs = banco.executarConsulta(sql);
         
         try {

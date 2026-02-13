@@ -59,7 +59,7 @@ public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
     private void carregarTabelaLocacoesCliente(boolean apenasAtivas){
         DefaultTableModel dfm = (DefaultTableModel) locacoesJTable.getModel();
         dfm.setRowCount(0);
-        cliente = bancoCliente.buscarCpf(cpfJFormattedTextField.getText());
+        cliente = bancoCliente.buscarPorCpf(cpfJFormattedTextField.getText());
         List<Locacao> lista = new ArrayList<>();
         if (cliente != null){
             if(apenasAtivas){
@@ -81,18 +81,7 @@ public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
                 linha[4] = locacao.getValorTotal();
                 dfm.addRow(linha);
             }
-            DefaultTableModel dfmItens = (DefaultTableModel) itensJTable.getModel();
-            dfmItens.setRowCount(0);
-        
-            List<ItemLocacao> listaItens = bancoLocacao.consultarFilmesLocadosCliente(cliente.getId());
-            for (ItemLocacao item : listaItens) {
             
-                Object[] linha = new Object[3];
-                linha[0] = item.getId();
-                linha[1] = bancoLocacao.retornaTitulo(item.getIdFilme());
-                linha[2] = item.getValorLocacao();
-                dfmItens.addRow(linha);
-            }
         }   
     }
     

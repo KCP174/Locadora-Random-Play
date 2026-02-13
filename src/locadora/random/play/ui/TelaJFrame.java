@@ -5,6 +5,7 @@
 package locadora.random.play.ui;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import locadora.random.play.Funcionario;
 import locadora.random.play.persistencia.FuncionarioDAOImplPsql;
 
@@ -36,17 +37,26 @@ public class TelaJFrame extends javax.swing.JFrame {
         barraDeFerramentas.setVisible(true);
         funcionarioJMenu.setVisible(adminPerm);
         logadoJMenuItem.setText("Logado como: " + login);
-        openHome();
+        abreHome();
     }
     
-    public void openHome(){
-        HomeJPanel jpanel = new HomeJPanel();
+    public void abreHome(){
+        HomeJPanel jpanel = new HomeJPanel(this);
         jpanel.setSize(conteudoJPanel.getWidth(), conteudoJPanel.getHeight());
         conteudoJPanel.removeAll();
         conteudoJPanel.add(jpanel);
         conteudoJPanel.revalidate();
         conteudoJPanel.repaint();
     }
+    public void abreAtalho(JPanel novaTela){
+        novaTela.setSize(conteudoJPanel.getWidth(), conteudoJPanel.getHeight());
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(novaTela);
+        conteudoJPanel.revalidate();
+        conteudoJPanel.repaint();
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +71,7 @@ public class TelaJFrame extends javax.swing.JFrame {
         barraDeFerramentas = new javax.swing.JMenuBar();
         loginJMenu = new javax.swing.JMenu();
         logadoJMenuItem = new javax.swing.JMenuItem();
+        homeJMenuItem = new javax.swing.JMenuItem();
         sairJMenuItem = new javax.swing.JMenuItem();
         locacaoJMenu = new javax.swing.JMenu();
         novaLocacaoJMenuItem = new javax.swing.JMenuItem();
@@ -97,6 +108,10 @@ public class TelaJFrame extends javax.swing.JFrame {
 
         logadoJMenuItem.setText("Logado como: Nome da Silva");
         loginJMenu.add(logadoJMenuItem);
+
+        homeJMenuItem.setText("Tela inicial");
+        homeJMenuItem.addActionListener(this::homeJMenuItemActionPerformed);
+        loginJMenu.add(homeJMenuItem);
 
         sairJMenuItem.setText("Sair");
         sairJMenuItem.addActionListener(this::sairJMenuItemActionPerformed);
@@ -264,6 +279,11 @@ public class TelaJFrame extends javax.swing.JFrame {
         conteudoJPanel.repaint();
     }//GEN-LAST:event_todosFilmesJMenuItemActionPerformed
 
+    private void homeJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeJMenuItemActionPerformed
+        // TODO add your handling code here:
+        abreHome();
+    }//GEN-LAST:event_homeJMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -300,6 +320,7 @@ public class TelaJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu filmeJMenu;
     private javax.swing.JMenu funcionarioJMenu;
     private javax.swing.JMenu generoJMenu;
+    private javax.swing.JMenuItem homeJMenuItem;
     private javax.swing.JMenu locacaoJMenu;
     private javax.swing.JMenuItem locacoesRegistradasJMenuItem;
     private javax.swing.JMenuItem logadoJMenuItem;

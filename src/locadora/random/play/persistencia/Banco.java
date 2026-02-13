@@ -63,6 +63,20 @@ public class Banco {
         }
     }
     
+    public ResultSet executarPreparedStatementRetornando(String sql, List parametros){
+        try {
+            PreparedStatement pstm = conexao.prepareStatement(sql);
+            for (int i = 0; i < parametros.size(); i++) {
+                Object obj = parametros.get(i);
+                pstm.setObject(i + 1, obj);
+            }
+            return pstm.executeQuery();
+        } catch(Exception erro){
+            erro.printStackTrace();
+            throw new RuntimeException(erro);
+        }
+    }
+    
     public ResultSet executarConsulta(String sql) {
         try {
             return conexao.createStatement().executeQuery(sql);

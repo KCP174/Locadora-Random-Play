@@ -8,6 +8,7 @@ package locadora.random.play;
  *
  * @author kauan
  */
+//Filme quando é locado
 public class ItemLocacao extends EntidadeBase{
     private int idLocacao;
     private int idFilme;

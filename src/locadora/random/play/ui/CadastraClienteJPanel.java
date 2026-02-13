@@ -42,7 +42,7 @@ public class CadastraClienteJPanel extends javax.swing.JPanel {
         DefaultTableModel dfm = (DefaultTableModel) clientesJTable.getModel();
         dfm.setRowCount(0);
         
-        List<Cliente> lista = banco.buscar(nome);
+        List<Cliente> lista = banco.buscarNome(nome);
         for (Cliente cliente : lista) {
             Object[] linha = new Object[6];
             linha[0] = cliente.getId();

@@ -11,6 +11,8 @@ import java.util.List;
 import locadora.random.play.Filme;
 import locadora.random.play.Filme;
 import locadora.random.play.Genero;
+import locadora.random.play.ItemLocacao;
+import locadora.random.play.Locacao;
 
 /**
  *
@@ -19,8 +21,11 @@ import locadora.random.play.Genero;
 public class FilmeDAOImplPsql implements IFilmeDAO{
     
     private Banco banco = new Banco();
+    private LocacaoDAOImplPsql bancoLocacoes = new LocacaoDAOImplPsql();
 
-    private List<Genero> retornaGeneros(int idFilme){
+    //Busca executada na tabela auxiliar pelos ids e depois na tabela de gêneros.
+    @Override
+    public List<Genero> retornaGeneros(int idFilme){
         List<Genero> generosFilme = new ArrayList<>();
         String sql = "SELECT * FROM generos_filme WHERE id_filme = " + idFilme;
         ResultSet rs = banco.executarConsulta(sql);
@@ -29,7 +34,7 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
             while(rs.next()){
                 Genero g = new Genero();
                 g.setId(rs.getInt("id_genero"));
-                
+                //Busca na tabela gênero a correspondência de id
                 sql = "SELECT * FROM genero WHERE id = " + g.getId();
                 ResultSet rsGenero = banco.executarConsulta(sql);
                 if(rsGenero.next()){
@@ -48,14 +53,14 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
     
     
     @Override
-    public Filme buscaId(int i){
+    public Filme buscaId(int id){
         banco.conectar();
-        String sql = "SELECT * FROM filme WHERE id = " + i + ";";
+        String sql = "SELECT * FROM filme WHERE id = " + id + ";";
         ResultSet rs = banco.executarConsulta(sql);
         Filme registro = new Filme();
         try {
             if(rs.next()){
-                registro = new Filme(rs.getString("titulo"), rs.getString("autor"), rs.getString("descricao"), rs.getDouble("valor_locacao"), rs.getInt("qntd_estoque"), rs.getInt("duracao"), retornaGeneros(i));
+                registro = new Filme(rs.getString("titulo"), rs.getString("autor"), rs.getString("descricao"), rs.getDouble("valor_locacao"), rs.getInt("qntd_estoque"), rs.getInt("duracao"), retornaGeneros(id));
                 registro.setId(rs.getInt("id"));
             }
         }catch (Exception erro){
@@ -78,6 +83,7 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
         sql += "'" + filme.getQntdEstoque()+ "',";
         sql += "'" + filme.getDuracao()+ "'";
         sql += ") RETURNING id;";
+        //Sql executado como "consulta" pois vai retornar o id gerado pelo INSERT
         ResultSet rs = banco.executarConsulta(sql);
         
         int ultimoId = -1;
@@ -90,6 +96,7 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
             throw new RuntimeException(erro);
         }
         
+        //Para cada gênero é feito o INSERT na tabela auxiliar
         for (Genero g : filme.getGenerosFilme()){
             sql = "INSERT INTO generos_filme (id_filme, id_genero) VALUES (";
             sql += ultimoId + ", ";
@@ -139,7 +146,7 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
         } else{
             sql = "SELECT * FROM filme ORDER BY id LIMIT ";
         }
-        sql += n;
+        sql += n + ";";
         ResultSet rs = banco.executarConsulta(sql);
         
         try {
@@ -204,13 +211,14 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
         parametros.add(filme.getId());
         banco.executarPreparedStatement(sql, parametros);
         
-        
+        //remoção dos gêneros antigos
         List<Genero> generosFilme = retornaGeneros(filme.getId());
         for(Genero g : generosFilme){
             sql = "DELETE FROM generos_filme WHERE id_genero = " + g.getId() + " AND id_filme = " + filme.getId();
             banco.executarSQL(sql);
         }
         
+        //Adição dos gêneros atualizados
         for (Genero g : filme.getGenerosFilme()){
             sql = "INSERT INTO generos_filme (id_filme, id_genero) VALUES (";
             sql += filme.getId() + ", ";
@@ -223,9 +231,26 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
 
     @Override
     public void remover(Filme filme) {
-        banco.conectar();
+        banco.conectar();                
+        //Algoritmo O(2) pra deixar tudo mais saboroso
+        //verifica se o filme está sendo locado
+        List<Locacao> locacoesAtivas = bancoLocacoes.consultarLocacoesAtivas();
+        for(Locacao l : locacoesAtivas){
+            List<ItemLocacao> itens = bancoLocacoes.consultarFilmesLocadosLocacao(l.getId());
+            for(ItemLocacao i : itens){
+                if(i.getIdFilme() == filme.getId()){
+                    throw new RuntimeException("O filme está sendo locado por um cliente");
+                }
+            }
+        }
+        
         String sql = "DELETE FROM filme WHERE id = " + filme.getId() + ";";
         banco.executarSQL(sql);
+        List<Genero> generosFilme = retornaGeneros(filme.getId());
+        for(Genero g : generosFilme){
+            sql = "DELETE FROM generos_filme WHERE id_genero = " + g.getId() + " AND id_filme = " + filme.getId();
+            banco.executarSQL(sql);
+        }
         banco.fechar();
     }
     
