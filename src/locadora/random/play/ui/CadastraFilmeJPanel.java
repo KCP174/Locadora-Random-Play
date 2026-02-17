@@ -144,6 +144,7 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
         qntdJLabel = new javax.swing.JLabel();
         qntdJTextField = new javax.swing.JTextField();
         removerGeneroJButton = new javax.swing.JButton();
+        atualizarJButton = new javax.swing.JButton();
 
         confirmaExclJDialog.setSize(new java.awt.Dimension(330, 190));
 
@@ -257,6 +258,9 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
         removerGeneroJButton.setText("Remover Gênero");
         removerGeneroJButton.addActionListener(this::removerGeneroJButtonActionPerformed);
 
+        atualizarJButton.setText("Atualizar");
+        atualizarJButton.addActionListener(this::atualizarJButtonActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -270,6 +274,8 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
                         .addComponent(tituloJLabel1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(atualizarJButton)
+                        .addGap(70, 70, 70)
                         .addComponent(editarJButton)
                         .addGap(60, 60, 60)
                         .addComponent(removerJButton)
@@ -389,7 +395,8 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(removerJButton)
-                    .addComponent(editarJButton))
+                    .addComponent(editarJButton)
+                    .addComponent(atualizarJButton))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -542,9 +549,14 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
         confirmaExclJDialog.setVisible(false);
     }//GEN-LAST:event_naoJButtonActionPerformed
 
+    private void atualizarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarJButtonActionPerformed
+        carregarTabelaFilmes();
+    }//GEN-LAST:event_atualizarJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionarGeneroJButton;
+    private javax.swing.JButton atualizarJButton;
     private javax.swing.JLabel autorJLabel;
     private javax.swing.JTextField autorJTextField;
     private javax.swing.JTextField buscaJTextField;
