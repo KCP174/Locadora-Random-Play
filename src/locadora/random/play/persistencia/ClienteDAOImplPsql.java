@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import locadora.random.play.Cliente;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import locadora.random.play.Locacao;
 
@@ -19,7 +20,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
     
     private Banco banco = new Banco();
     private LocacaoDAOImplPsql bancoLocacoes = new LocacaoDAOImplPsql();
-
+    
     @Override
     public void inserir(Cliente cliente) {
         banco.conectar();
@@ -59,7 +60,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         
         try {
             while(rs.next()){
-                Cliente registro = new Cliente(rs.getString("nome"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                Cliente registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -82,7 +83,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         
         try {
             while(rs.next()){
-                Cliente registro = new Cliente(rs.getString("nome"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                Cliente registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -106,7 +107,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         
         try {
             while(rs.next()){
-                Cliente registro = new Cliente(rs.getString("nome"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                Cliente registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -128,7 +129,7 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         
         try {
             if(rs.next()){
-                registro = new Cliente(rs.getString("nome"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
                 registro.setId(rs.getInt("id"));
             }
         }catch (Exception erro){

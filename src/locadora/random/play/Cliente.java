@@ -4,6 +4,7 @@
  */
 package locadora.random.play;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Cliente extends Pessoa{
     }
     
     
-    public Cliente(String nome, String dataNasc, String cpf, String endereco, String email) {
+    public Cliente(String nome, LocalDate dataNasc, String cpf, String endereco, String email) {
         setNome(nome);
         setDataNasc(dataNasc);
         setCpf(cpf);

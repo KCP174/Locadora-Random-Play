@@ -4,6 +4,8 @@
  */
 package locadora.random.play.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +18,9 @@ import locadora.random.play.persistencia.FuncionarioDAOImplPsql;
  * @author kauan
  */
 public class FuncionarioJPanel extends javax.swing.JPanel {
-    FuncionarioDAOImplPsql banco = new FuncionarioDAOImplPsql();
+    private FuncionarioDAOImplPsql banco = new FuncionarioDAOImplPsql();
+    private DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
     /**
      * Creates new form FuncionarioJPanel
      */
@@ -36,7 +40,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
             linha[0] = funcionario.getId();
             linha[1] = funcionario.getNome();
             linha[2] = funcionario.getCpf();
-            linha[3] = funcionario.getDataNasc();
+            linha[3] = funcionario.getDataNasc().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             linha[4] = funcionario.getLogin();
             linha[5] = funcionario.getSenha();
             linha[6] = funcionario.isAdminPerm();
@@ -59,7 +63,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
             linha[0] = funcionario.getId();
             linha[1] = funcionario.getNome();
             linha[2] = funcionario.getCpf();
-            linha[3] = funcionario.getDataNasc();
+            linha[3] = funcionario.getDataNasc().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             linha[4] = funcionario.getLogin();
             linha[5] = funcionario.getSenha();
             linha[6] = funcionario.isAdminPerm();
@@ -330,7 +334,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
 
     private void cadastrarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarJButtonActionPerformed
         try {
-        Funcionario novoFuncionario = new Funcionario(nomeJTextField.getText(), loginJTextField.getText(), senhaJTextField.getText(), dataNascJFormattedTextField.getText(), cpfJFormattedTextField.getText(), perfilJCheckBox.isSelected());
+        Funcionario novoFuncionario = new Funcionario(nomeJTextField.getText(), loginJTextField.getText(), senhaJTextField.getText(), LocalDate.parse(dataNascJFormattedTextField.getText(), formato), cpfJFormattedTextField.getText(), perfilJCheckBox.isSelected());
         String idStr = idJTextField.getText();  
             try {
                 int id = Integer.parseInt(idStr);

@@ -4,20 +4,22 @@
  */
 package locadora.random.play;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author kauan
  */
 public abstract class Pessoa extends EntidadeBase{
     String nome;
-    String dataNasc;
+    LocalDate dataNasc;
     String cpf;
 
     public String getNome() {
         return nome;
     }
 
-    public String getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
@@ -35,10 +37,14 @@ public abstract class Pessoa extends EntidadeBase{
         this.nome = nome;
     }
 
-    public final void setDataNasc(String dataNasc) {
-        if(dataNasc.length() != 10) {
+    public final void setDataNasc(LocalDate dataNasc) {
+        if(dataNasc.isAfter(LocalDate.now())) {
             throw new RuntimeException("Data de nascimento inválida");
-        }
+        }else if(!dataNasc.isBefore(LocalDate.now().minusYears(18))) {
+            throw new RuntimeException("Pessoa precisa ter pelo menos 18 anos!");
+        }else if(dataNasc.isBefore(LocalDate.now().minusYears(100))) {
+            throw new RuntimeException("Data de nascimento inválida");
+        } 
         this.dataNasc = dataNasc;
     }
 

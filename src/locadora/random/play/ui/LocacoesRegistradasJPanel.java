@@ -72,7 +72,7 @@ public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
                 Object[] linha = new Object[5];
                 linha[0] = locacao.getId();
                 linha[1] = cliente.getNome();
-                linha[2] = locacao.getDataLocacao();
+                linha[2] = locacao.getDataLocacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 if(locacao.getDataDevolucaoReal() != null){
                     linha[3] = locacao.getDataDevolucaoReal().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 }else{

@@ -10,7 +10,8 @@ package locadora.random.play;
  */
 public class Sql {
 /*
--- Database: random-play
+-- Database: random_play
+
 -- DROP DATABASE IF EXISTS "random_play";
 
 CREATE DATABASE "random_play"
@@ -23,6 +24,7 @@ CREATE DATABASE "random_play"
     IS_TEMPLATE = False;
 
 -- Table: public.cliente
+
 -- DROP TABLE IF EXISTS public.cliente;
 
 CREATE TABLE IF NOT EXISTS public.cliente
@@ -31,12 +33,18 @@ CREATE TABLE IF NOT EXISTS public.cliente
     nome character varying(100) COLLATE pg_catalog."default" NOT NULL,
     cpf character varying(14) COLLATE pg_catalog."default" NOT NULL,
     endereco character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    data_nascimento character varying(10) COLLATE pg_catalog."default" NOT NULL,
     email character varying(100) COLLATE pg_catalog."default",
+    data_nascimento date,
     CONSTRAINT cliente_pkey PRIMARY KEY (id)
 );
 
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.cliente
+    OWNER to postgres;
+
 -- Table: public.filme
+
 -- DROP TABLE IF EXISTS public.filme;
 
 CREATE TABLE IF NOT EXISTS public.filme
@@ -51,7 +59,13 @@ CREATE TABLE IF NOT EXISTS public.filme
     CONSTRAINT filme_pkey PRIMARY KEY (id)
 );
 
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.filme
+    OWNER to postgres;
+
 -- Table: public.funcionario
+
 -- DROP TABLE IF EXISTS public.funcionario;
 
 CREATE TABLE IF NOT EXISTS public.funcionario
@@ -60,12 +74,19 @@ CREATE TABLE IF NOT EXISTS public.funcionario
     nome character varying(100) COLLATE pg_catalog."default",
     login character varying(50) COLLATE pg_catalog."default",
     senha character varying(50) COLLATE pg_catalog."default",
-    data_nascimento character varying(10) COLLATE pg_catalog."default",
     cpf character varying(14) COLLATE pg_catalog."default",
+    admin boolean,
+    data_nascimento date,
     CONSTRAINT funcionario_pkey PRIMARY KEY (id)
 );
 
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.funcionario
+    OWNER to postgres;
+
 -- Table: public.genero
+
 -- DROP TABLE IF EXISTS public.genero;
 
 CREATE TABLE IF NOT EXISTS public.genero
@@ -75,7 +96,13 @@ CREATE TABLE IF NOT EXISTS public.genero
     CONSTRAINT genero_pkey PRIMARY KEY (id)
 );
 
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.genero
+    OWNER to postgres;
+
 -- Table: public.generos_filme
+
 -- DROP TABLE IF EXISTS public.generos_filme;
 
 CREATE TABLE IF NOT EXISTS public.generos_filme
@@ -85,7 +112,13 @@ CREATE TABLE IF NOT EXISTS public.generos_filme
     id_genero integer
 );
 
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.generos_filme
+    OWNER to postgres;
+
 -- Table: public.itens_locacao
+
 -- DROP TABLE IF EXISTS public.itens_locacao;
 
 CREATE TABLE IF NOT EXISTS public.itens_locacao
@@ -97,7 +130,13 @@ CREATE TABLE IF NOT EXISTS public.itens_locacao
     CONSTRAINT itens_locacao_pkey PRIMARY KEY (id)
 );
 
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.itens_locacao
+    OWNER to postgres;
+
 -- Table: public.locacao
+
 -- DROP TABLE IF EXISTS public.locacao;
 
 CREATE TABLE IF NOT EXISTS public.locacao
@@ -119,5 +158,13 @@ CREATE TABLE IF NOT EXISTS public.locacao
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.locacao
+    OWNER to postgres;
+
+
+
 */
 }

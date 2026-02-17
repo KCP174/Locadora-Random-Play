@@ -4,6 +4,8 @@
  */
 package locadora.random.play;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author kauan
@@ -17,7 +19,7 @@ public class Funcionario extends Pessoa{
     public Funcionario() {
     }
     
-    public Funcionario(String nome, String login, String senha, String dataNasc, String cpf, boolean adminPerm) {
+    public Funcionario(String nome, String login, String senha, LocalDate dataNasc, String cpf, boolean adminPerm) {
         setNome(nome);
         setDataNasc(dataNasc);
         setCpf(cpf);

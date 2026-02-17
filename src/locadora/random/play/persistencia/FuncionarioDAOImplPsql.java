@@ -5,6 +5,7 @@
 package locadora.random.play.persistencia;
 
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import locadora.random.play.Funcionario;
@@ -16,7 +17,7 @@ import locadora.random.play.Funcionario;
 public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
     
     private Banco banco = new Banco();
-
+    
     @Override
     public void inserir(Funcionario funcionario) {
         banco.conectar();
@@ -43,7 +44,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         ResultSet rs = banco.executarPreparedStatementRetornando(sql, parametros);
         try {
             if(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 return registro;
             }
@@ -64,7 +65,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         
         try {
             while(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -87,7 +88,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         
         try {
             while(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -111,7 +112,7 @@ public class FuncionarioDAOImplPsql implements IFuncionarioDAO{
         
         try {
             while(rs.next()){
-                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), rs.getString("data_nascimento"), rs.getString("cpf"), rs.getBoolean("admin"));
+                Funcionario registro = new Funcionario(rs.getString("nome"), rs.getString("login"), rs.getString("senha"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getBoolean("admin"));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }

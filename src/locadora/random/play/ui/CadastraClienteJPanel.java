@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package locadora.random.play.ui;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +16,7 @@ import locadora.random.play.persistencia.ClienteDAOImplPsql;
  */
 public class CadastraClienteJPanel extends javax.swing.JPanel {
     private ClienteDAOImplPsql banco = new ClienteDAOImplPsql();
+    private DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     /**
      * Creates new form ClienteJPanel
      */
@@ -32,7 +35,7 @@ public class CadastraClienteJPanel extends javax.swing.JPanel {
             linha[0] = cliente.getId();
             linha[1] = cliente.getNome();
             linha[2] = cliente.getCpf();
-            linha[3] = cliente.getDataNasc();
+            linha[3] = cliente.getDataNasc().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             linha[4] = cliente.getEmail();
             linha[5] = cliente.getEndereco();
             dfm.addRow(linha);
@@ -48,7 +51,7 @@ public class CadastraClienteJPanel extends javax.swing.JPanel {
             linha[0] = cliente.getId();
             linha[1] = cliente.getNome();
             linha[2] = cliente.getCpf();
-            linha[3] = cliente.getDataNasc();
+            linha[3] = cliente.getDataNasc().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             linha[4] = cliente.getEmail();
             linha[5] = cliente.getEndereco();
             dfm.addRow(linha);
@@ -317,13 +320,14 @@ public class CadastraClienteJPanel extends javax.swing.JPanel {
 
     private void cadastrarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarJButtonActionPerformed
         try {
-        Cliente novoCliente = new Cliente(nomeJTextField.getText(), dataNascJFormattedTextField.getText(), cpfJFormattedTextField.getText(), enderecoJTextField.getText(), emailJTextField.getText());
+        Cliente novoCliente = new Cliente(nomeJTextField.getText(), LocalDate.parse(dataNascJFormattedTextField.getText(), formato), cpfJFormattedTextField.getText(), enderecoJTextField.getText(), emailJTextField.getText());
         String idStr = idJTextField.getText();  
             try {
                 int id = Integer.parseInt(idStr);
                 novoCliente.setId(id);
                 banco.atualizar(novoCliente);
-                JOptionPane.showMessageDialog(cadastrarJButton, "Cliente atualizado!");                
+                JOptionPane.showMessageDialog(cadastrarJButton, "Cliente atualizado!");
+                cancelarJButtonActionPerformed(evt);
             } catch(NumberFormatException erro){
             //Verificar se o cpf já está no sistema
                 List<Cliente> listaCliente = banco.consultar();

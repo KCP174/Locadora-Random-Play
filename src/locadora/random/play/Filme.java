@@ -4,6 +4,7 @@
  */
 package locadora.random.play;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,10 @@ public final class Filme extends EntidadeBase{
     private String autor;
     private String descricao;
     private int duracao;
-    private double valorLocacao;
     private int qntdEstoque;
+    private double valorLocacao;
     private List<Genero> generosFilme = new ArrayList<>();
+    
     
     
     
