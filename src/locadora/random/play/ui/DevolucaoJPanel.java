@@ -26,7 +26,6 @@ import locadora.random.play.persistencia.LocacaoDAOImplPsql;
 public class DevolucaoJPanel extends javax.swing.JPanel {
     LocacaoDAOImplPsql bancoLocacao = new LocacaoDAOImplPsql();
     ClienteDAOImplPsql bancoCliente = new ClienteDAOImplPsql();
-    Cliente cliente = new Cliente();
     
     /**
      * Creates new form DevolverJPanel
@@ -38,7 +37,8 @@ public class DevolucaoJPanel extends javax.swing.JPanel {
     private void carregarTabelaLocacoesCliente(){
         DefaultTableModel dfm = (DefaultTableModel) locacoesJTable.getModel();
         dfm.setRowCount(0);
-        cliente = bancoCliente.buscarPorCpf(cpfJFormattedTextField.getText());
+        Cliente cliente = bancoCliente.buscarPorCpf(cpfJFormattedTextField.getText());
+        
         List<Locacao> lista = new ArrayList<>();
         if (cliente != null){
             lista = bancoLocacao.consultarLocacoesAtivasDoCliente(cliente.getId());
@@ -51,7 +51,12 @@ public class DevolucaoJPanel extends javax.swing.JPanel {
                 linha[3] = locacao.getValorTotal();
                 dfm.addRow(linha);
             }
-        }   
+            if (locacoesJTable.getRowCount() == 0){
+                JOptionPane.showMessageDialog(buscarJButton, "CPF fornecido não tem locações ativas!");
+            }
+        }else {
+            JOptionPane.showMessageDialog(buscarJButton, "CPF não encontrado no sistema!");
+        }
     }
     
     private void carregarTabelaItens(int id){
@@ -77,7 +82,7 @@ public class DevolucaoJPanel extends javax.swing.JPanel {
         int diasLocados = (int) ChronoUnit.DAYS.between(dataLocacao, dataPrevista);
         
         
-        if (diasAtrasados >= 0){
+        if (diasAtrasados > 0){
             Double valorTotal = (Double) locacoesJTable.getValueAt(selecionada, 3);
             Double valorDiario = valorTotal / diasLocados;         
             Double multa = diasAtrasados * valorDiario;
@@ -294,14 +299,10 @@ public class DevolucaoJPanel extends javax.swing.JPanel {
     private void buscarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarJButtonActionPerformed
         if (!cpfJFormattedTextField.getText().equals("   .   .   -  ")){
             carregarTabelaLocacoesCliente();
-            if(cliente == null){
-                JOptionPane.showMessageDialog(buscarJButton, "CPF não encontrado no sistema!");
-            } else if (locacoesJTable.getRowCount() == 0){
-                JOptionPane.showMessageDialog(buscarJButton, "CPF fornecido não tem locações ativas!");
-            }
         }else{
             JOptionPane.showMessageDialog(buscarJButton, "Insira um CPF válido!");
         }
+        
     }//GEN-LAST:event_buscarJButtonActionPerformed
 
     private void selecionarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarJButtonActionPerformed
@@ -333,8 +334,11 @@ public class DevolucaoJPanel extends javax.swing.JPanel {
 
     private void limparJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparJButtonActionPerformed
         cpfJFormattedTextField.setText("");
-        carregarTabelaLocacoesCliente();
-        carregarTabelaItens(0);
+        DefaultTableModel dfm = (DefaultTableModel) locacoesJTable.getModel();
+        dfm.setRowCount(0);
+        dfm = (DefaultTableModel) itensJTable.getModel();
+        dfm.setRowCount(0);
+        
         selecionadaJTextField.setText("");
         multaJTextField.setText("R$ 0.00");
     }//GEN-LAST:event_limparJButtonActionPerformed

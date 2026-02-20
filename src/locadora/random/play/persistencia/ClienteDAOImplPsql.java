@@ -60,7 +60,12 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         
         try {
             while(rs.next()){
-                Cliente registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                Cliente registro = new Cliente();
+                registro.setNome(rs.getString("nome"));
+                registro.setCpf(rs.getString("cpf"));
+                registro.setEndereco(rs.getString("endereco"));
+                registro.setEmail(rs.getString("email"));
+                registro.setDataNasc(LocalDate.parse(rs.getString(("data_nascimento"))));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -83,9 +88,14 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         
         try {
             while(rs.next()){
-                Cliente registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                Cliente registro = new Cliente();
+                registro.setNome(rs.getString("nome"));
+                registro.setCpf(rs.getString("cpf"));
+                registro.setEndereco(rs.getString("endereco"));
+                registro.setEmail(rs.getString("email"));
+                registro.setDataNasc(LocalDate.parse(rs.getString(("data_nascimento"))));
                 registro.setId(rs.getInt("id"));
-                lista.add(registro);
+                lista.add(registro);;
             }
         }catch (Exception erro){
             erro.printStackTrace();
@@ -107,7 +117,12 @@ public class ClienteDAOImplPsql implements IClienteDAO {
         
         try {
             while(rs.next()){
-                Cliente registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                Cliente registro = new Cliente();
+                registro.setNome(rs.getString("nome"));
+                registro.setCpf(rs.getString("cpf"));
+                registro.setEndereco(rs.getString("endereco"));
+                registro.setEmail(rs.getString("email"));
+                registro.setDataNasc(LocalDate.parse(rs.getString(("data_nascimento"))));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -122,15 +137,21 @@ public class ClienteDAOImplPsql implements IClienteDAO {
     
     @Override
     public Cliente buscarPorCpf(String cpf) {
-        Cliente registro = null;
+        Cliente registro = new Cliente();
         banco.conectar();
         String sql = "SELECT * FROM cliente WHERE cpf = '" + cpf + "';";
         ResultSet rs = banco.executarConsulta(sql);
         
         try {
             if(rs.next()){
-                registro = new Cliente(rs.getString("nome"), LocalDate.parse(rs.getString(("data_nascimento"))), rs.getString("cpf"), rs.getString("endereco"), rs.getString("email"));
+                registro.setNome(rs.getString("nome"));
+                registro.setCpf(rs.getString("cpf"));
+                registro.setEndereco(rs.getString("endereco"));
+                registro.setEmail(rs.getString("email"));
+                registro.setDataNasc(LocalDate.parse(rs.getString(("data_nascimento"))));
                 registro.setId(rs.getInt("id"));
+            }else{
+                return null;
             }
         }catch (Exception erro){
             erro.printStackTrace();

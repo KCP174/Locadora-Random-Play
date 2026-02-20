@@ -22,7 +22,6 @@ import locadora.random.play.persistencia.LocacaoDAOImplPsql;
 public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
     LocacaoDAOImplPsql bancoLocacao = new LocacaoDAOImplPsql();
     ClienteDAOImplPsql bancoCliente = new ClienteDAOImplPsql();
-    Cliente cliente = new Cliente();
     /**
      * Creates new form BuscaLocacaoJPanel
      */
@@ -59,7 +58,9 @@ public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
     private void carregarTabelaLocacoesCliente(boolean apenasAtivas){
         DefaultTableModel dfm = (DefaultTableModel) locacoesJTable.getModel();
         dfm.setRowCount(0);
-        cliente = bancoCliente.buscarPorCpf(cpfJFormattedTextField.getText());
+        
+        Cliente cliente = bancoCliente.buscarPorCpf(cpfJFormattedTextField.getText());
+        
         List<Locacao> lista = new ArrayList<>();
         if (cliente != null){
             if(apenasAtivas){
@@ -68,7 +69,6 @@ public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
                 lista = bancoLocacao.consultarLocacoesDoCliente(cliente.getId());
             }
             for (Locacao locacao : lista) {
-            
                 Object[] linha = new Object[5];
                 linha[0] = locacao.getId();
                 linha[1] = cliente.getNome();
@@ -81,8 +81,13 @@ public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
                 linha[4] = locacao.getValorTotal();
                 dfm.addRow(linha);
             }
-            
-        }   
+            if (locacoesJTable.getRowCount() == 0){
+                JOptionPane.showMessageDialog(buscarJButton, "CPF fornecido não tem locações!");
+            }
+        }else{
+                JOptionPane.showMessageDialog(buscarJButton, "CPF não encontrado no sistema!");
+        }
+        
     }
     
     private void carregarTabelaItens(int id){
@@ -282,9 +287,6 @@ public class LocacoesRegistradasJPanel extends javax.swing.JPanel {
     private void buscarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarJButtonActionPerformed
         if (!cpfJFormattedTextField.getText().equals("   .   .   -  ")){
             carregarTabelaLocacoesCliente(filtroJCheckBox.isSelected());
-            if(cliente == null){
-                JOptionPane.showMessageDialog(buscarJButton, "CPF não encontrado no sistema!");
-            }
         }else{
             JOptionPane.showMessageDialog(buscarJButton, "Insira um CPF válido!");
         }

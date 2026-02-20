@@ -67,7 +67,11 @@ public class LocacaoDAOImplPsql implements ILocacao{
         ResultSet rs = banco.executarConsulta(sql);
         try {
             while(rs.next()){
-                Locacao registro = new Locacao(LocalDate.parse(rs.getString("data_devolucao")), rs.getDouble("valor_total"), rs.getInt("id_cliente"), rs.getInt("id_funcionario"));
+                Locacao registro = new Locacao();
+                registro.setDataDevolucao(LocalDate.parse(rs.getString("data_devolucao")));
+                registro.setValorTotal(rs.getDouble("valor_total"));
+                registro.setIdCliente(rs.getInt("id_cliente"));
+                registro.setIdFuncionario(rs.getInt("id_funcionario"));
                 registro.setDataLocacao(LocalDate.parse(rs.getString("data_locacao")));
                 if(rs.getString("data_devolucao_real") != null){
                     registro.setDataDevolucaoReal(LocalDate.parse(rs.getString("data_devolucao_real")));
@@ -92,11 +96,16 @@ public class LocacaoDAOImplPsql implements ILocacao{
         ResultSet rs = banco.executarConsulta(sql);
         try {
             while(rs.next()){
-                Locacao registro = new Locacao(LocalDate.parse(rs.getString("data_devolucao")), rs.getDouble("valor_total"), rs.getInt("id_cliente"), rs.getInt("id_funcionario"));
+                Locacao registro = new Locacao();
+                registro.setDataDevolucao(LocalDate.parse(rs.getString("data_devolucao")));
+                registro.setValorTotal(rs.getDouble("valor_total"));
+                registro.setIdCliente(rs.getInt("id_cliente"));
+                registro.setIdFuncionario(rs.getInt("id_funcionario"));
                 registro.setDataLocacao(LocalDate.parse(rs.getString("data_locacao")));
-                if(rs.getString("data_devolucao_real") != null){
+                if (rs.getString("data_devolucao_real") != null){
                     registro.setDataDevolucaoReal(LocalDate.parse(rs.getString("data_devolucao_real")));
                 }
+                
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -117,11 +126,16 @@ public class LocacaoDAOImplPsql implements ILocacao{
         ResultSet rs = banco.executarConsulta(sql);
         try {
             while(rs.next()){
-                Locacao registro = new Locacao(LocalDate.parse(rs.getString("data_devolucao")), rs.getDouble("valor_total"), rs.getInt("id_cliente"), rs.getInt("id_funcionario"));
+                Locacao registro = new Locacao();
+                registro.setDataDevolucao(LocalDate.parse(rs.getString("data_devolucao")));
+                registro.setValorTotal(rs.getDouble("valor_total"));
+                registro.setIdCliente(rs.getInt("id_cliente"));
+                registro.setIdFuncionario(rs.getInt("id_funcionario"));
                 registro.setDataLocacao(LocalDate.parse(rs.getString("data_locacao")));
-                if(rs.getString("data_devolucao_real") != null){
+                if (rs.getString("data_devolucao_real") != null){
                     registro.setDataDevolucaoReal(LocalDate.parse(rs.getString("data_devolucao_real")));
                 }
+                
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -140,11 +154,16 @@ public class LocacaoDAOImplPsql implements ILocacao{
         ResultSet rs = banco.executarConsulta(sql);
         try {
             while(rs.next()){
-                Locacao registro = new Locacao(LocalDate.parse(rs.getString("data_devolucao")), rs.getDouble("valor_total"), rs.getInt("id_cliente"), rs.getInt("id_funcionario"));
+                Locacao registro = new Locacao();
+                registro.setDataDevolucao(LocalDate.parse(rs.getString("data_devolucao")));
+                registro.setValorTotal(rs.getDouble("valor_total"));
+                registro.setIdCliente(rs.getInt("id_cliente"));
+                registro.setIdFuncionario(rs.getInt("id_funcionario"));
                 registro.setDataLocacao(LocalDate.parse(rs.getString("data_locacao")));
-                if(rs.getString("data_devolucao_real") != null){
+                if (rs.getString("data_devolucao_real") != null){
                     registro.setDataDevolucaoReal(LocalDate.parse(rs.getString("data_devolucao_real")));
                 }
+                
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -168,11 +187,17 @@ public class LocacaoDAOImplPsql implements ILocacao{
         
         try {
             while(rs.next()){
-                Locacao registro = new Locacao(LocalDate.parse(rs.getString("data_devolucao")), rs.getDouble("valor_total"), rs.getInt("id_cliente"), rs.getInt("id_funcionario"));
+                Locacao registro = new Locacao();
+                registro.setDataDevolucao(LocalDate.parse(rs.getString("data_devolucao")));
+                registro.setValorTotal(rs.getDouble("valor_total"));
+                registro.setIdCliente(rs.getInt("id_cliente"));
+                registro.setIdFuncionario(rs.getInt("id_funcionario"));
                 registro.setDataLocacao(LocalDate.parse(rs.getString("data_locacao")));
-                if(rs.getString("data_devolucao_real") != null){
+                if (rs.getString("data_devolucao_real") != null){
                     registro.setDataDevolucaoReal(LocalDate.parse(rs.getString("data_devolucao_real")));
                 }
+                
+                
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -205,34 +230,18 @@ public class LocacaoDAOImplPsql implements ILocacao{
     public List<ItemLocacao> consultarItens(int id) {
         List<ItemLocacao> lista = new ArrayList<>();
         banco.conectar();
-        if (id != -1){
-            String sql = "SELECT * FROM itens_locacao WHERE id_locacao = " + id + " ORDER BY id;";
-            ResultSet rs = banco.executarConsulta(sql);
-            try {
-                while(rs.next()){
-                    ItemLocacao registro = new ItemLocacao(rs.getInt("id"), rs.getInt("id_filme"), rs.getDouble("valor_unitario"));
-                    registro.setId(rs.getInt("id"));
-                    lista.add(registro);
-                }   
-            }catch (Exception erro){
-                erro.printStackTrace();
-                throw new RuntimeException(erro);
-            }
-        }else{
-            String sql = "SELECT * FROM itens_locacao ORDER BY id;";
-            ResultSet rs = banco.executarConsulta(sql);
-            try {
-                while(rs.next()){
-                    ItemLocacao registro = new ItemLocacao(rs.getInt("id"), rs.getInt("id_filme"), rs.getDouble("valor_unitario"));
-                    registro.setId(rs.getInt("id"));
-                    lista.add(registro);
-                }
-            }catch (Exception erro){
-                erro.printStackTrace();
-                throw new RuntimeException(erro);
-            }
+        String sql = "SELECT * FROM itens_locacao WHERE id_locacao = " + id + " ORDER BY id;";
+        ResultSet rs = banco.executarConsulta(sql);
+        try {
+            while(rs.next()){
+                ItemLocacao registro = new ItemLocacao(rs.getInt("id"), rs.getInt("id_filme"), rs.getDouble("valor_unitario"));
+                registro.setId(rs.getInt("id"));
+                lista.add(registro);
+            }   
+        }catch (Exception erro){
+            erro.printStackTrace();
+            throw new RuntimeException(erro);
         }
-        
         banco.fechar();
         return lista;
     }
@@ -307,10 +316,10 @@ public class LocacaoDAOImplPsql implements ILocacao{
         return filmesLocados;
     }
     
+    @Override
     public void devolver(int idLocacao) {
-        banco.conectar();
         List<ItemLocacao> itens = consultarFilmesLocadosLocacao(idLocacao);
-        
+        banco.conectar();
         String sqlLocacao = "UPDATE locacao SET data_devolucao_real = '" + LocalDate.now() + "' WHERE id = " + idLocacao;
         banco.executarSQL(sqlLocacao);
         
@@ -320,6 +329,6 @@ public class LocacaoDAOImplPsql implements ILocacao{
             
             banco.executarSQL(sqlItens);
         }
+        banco.fechar();
     }
-    
 }

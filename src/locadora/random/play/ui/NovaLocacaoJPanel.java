@@ -46,6 +46,18 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
     }
     
     private void calculaDias(boolean insercaoDireta){
+        try{
+            if ((int) diasJSpinner.getValue() <= 0){
+                diasJSpinner.setValue(1);
+                throw new RuntimeException("Locação precisa ter pelo menos 1 dia!");
+            }
+            if ((int) diasJSpinner.getValue() > 30){
+                diasJSpinner.setValue(30);
+                throw new RuntimeException("Locação pode ter no máximo 30 dias");
+            }
+            }catch(RuntimeException e){
+            JOptionPane.showMessageDialog(diasJSpinner, e.getMessage());
+        }
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         dataLocacaoJFormattedTextField.setText(dataLocacao.format(formato));
         if(insercaoDireta){
@@ -76,8 +88,6 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
         dfm.setRowCount(0);
         valorTotal = 0.00;
         int dias = 1;
-
-        try{
             for(Filme f : carrinho){
                 Object[] linha = new Object[2];
                 linha[0] = f.getTitulo();
@@ -85,15 +95,6 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
                 dfm.addRow(linha);
                 valorTotal += f.getValorLocacao();
             }
-            dias = (int) diasJSpinner.getValue();
-            if (dias <= 0){
-                throw new NumberFormatException();
-            }
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(diasJSpinner, "Locação precisa ter pelo menos 1 dia!");
-            diasJSpinner.setValue(1);
-        }
-        
         dias = (int) diasJSpinner.getValue();
         valorTotal *= dias;
         BigDecimal bd = new BigDecimal(valorTotal);
@@ -592,7 +593,7 @@ public class NovaLocacaoJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(finalizarJButton, "Efetue o pagamento: " + valorTotalJTextField.getText());
             JOptionPane.showMessageDialog(finalizarJButton, "Locação realizada com sucesso!");
 
-            Locacao locacao = new Locacao(dataDevolucao, valorTotal, (int) clientesJTable.getValueAt(clientesJTable.getSelectedRow(), 0), Sessao.idLogado);
+            Locacao locacao = new Locacao(dataDevolucao, valorTotal, (int) clientesJTable.getValueAt(clientesJTable.getSelectedRow(), 0), Sessao.usuario.getId());
             List<ItemLocacao> carrinhoLocacao = new ArrayList<>();
             for (Filme f : carrinho){
                 carrinhoLocacao.add(f.toItem());

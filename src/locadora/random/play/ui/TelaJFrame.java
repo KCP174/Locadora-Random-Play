@@ -40,6 +40,16 @@ public class TelaJFrame extends javax.swing.JFrame {
         abreHome();
     }
     
+    public void sair(){
+        LoginJPanel jpanel = new LoginJPanel(this);
+        jpanel.setSize(conteudoJPanel.getWidth(), conteudoJPanel.getHeight());
+        conteudoJPanel.removeAll();
+        conteudoJPanel.add(jpanel);
+        conteudoJPanel.revalidate();
+        conteudoJPanel.repaint();
+        barraDeFerramentas.setVisible(false);
+    }
+    
     public void abreHome(){
         HomeJPanel jpanel = new HomeJPanel(this);
         jpanel.setSize(conteudoJPanel.getWidth(), conteudoJPanel.getHeight());
@@ -225,13 +235,7 @@ public class TelaJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastraEBuscaJMenuItemActionPerformed
 
     private void sairJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairJMenuItemActionPerformed
-        LoginJPanel jpanel = new LoginJPanel(this);
-        jpanel.setSize(conteudoJPanel.getWidth(), conteudoJPanel.getHeight());
-        conteudoJPanel.removeAll();
-        conteudoJPanel.add(jpanel);
-        conteudoJPanel.revalidate();
-        conteudoJPanel.repaint();
-        barraDeFerramentas.setVisible(false);
+        sair();
     }//GEN-LAST:event_sairJMenuItemActionPerformed
 
     private void cadastrarFilmeJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarFilmeJMenuItemActionPerformed

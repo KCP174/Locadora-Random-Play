@@ -15,7 +15,7 @@ import java.util.List;
 public class Locacao extends EntidadeBase{
     private LocalDate dataLocacao;
     private LocalDate dataDevolucao;
-    private LocalDate dataDevolucaoReal;
+    private LocalDate dataDevolucaoReal = null;
     private double valorTotal;
     private int idCliente;
     private int idFuncionario;
@@ -63,8 +63,6 @@ public class Locacao extends EntidadeBase{
     public void setItensLocados(List<ItemLocacao> itensLocados) {
         this.itensLocados = itensLocados;
     }
-
-    
     
     public LocalDate getDataLocacao() {
         return dataLocacao;

@@ -6,6 +6,7 @@ package locadora.random.play.ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -54,7 +55,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
     
         //É implementado de uma forma a qual o admin principal só pode ser alterado diretamente no banco
         List<Funcionario> lista = banco.buscar(nome);
-        if (!lista.isEmpty() && lista.get(0).getNome().equals("admin")){
+        if (!lista.isEmpty() && lista.get(0).getId() == 1){
             lista.remove(0);
         }
         
@@ -334,8 +335,19 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
 
     private void cadastrarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarJButtonActionPerformed
         try {
-        Funcionario novoFuncionario = new Funcionario(nomeJTextField.getText(), loginJTextField.getText(), senhaJTextField.getText(), LocalDate.parse(dataNascJFormattedTextField.getText(), formato), cpfJFormattedTextField.getText(), perfilJCheckBox.isSelected());
-        String idStr = idJTextField.getText();  
+            Funcionario novoFuncionario = new Funcionario();
+            novoFuncionario.setNome(nomeJTextField.getText());
+            novoFuncionario.setLogin(loginJTextField.getText());
+            novoFuncionario.setSenha(senhaJTextField.getText());
+            novoFuncionario.setCpf(cpfJFormattedTextField.getText());
+            novoFuncionario.setAdminPerm(perfilJCheckBox.isSelected());
+            try{
+                novoFuncionario.setDataNasc(LocalDate.parse(dataNascJFormattedTextField.getText(), formato));
+            }catch (DateTimeParseException e){
+                throw new RuntimeException("Data de nascimento inválida");
+            }
+            
+            String idStr = idJTextField.getText();
             try {
                 int id = Integer.parseInt(idStr);
                 novoFuncionario.setId(id);
@@ -375,6 +387,7 @@ public class FuncionarioJPanel extends javax.swing.JPanel {
         dataNascJFormattedTextField.setText("");
         loginJTextField.setText("");
         senhaJTextField.setText("");
+        perfilJCheckBox.setSelected(false);
     }//GEN-LAST:event_cancelarJButtonActionPerformed
 
     private void excluirJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirJButtonActionPerformed

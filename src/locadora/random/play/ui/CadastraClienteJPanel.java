@@ -5,6 +5,7 @@
 package locadora.random.play.ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -320,7 +321,18 @@ public class CadastraClienteJPanel extends javax.swing.JPanel {
 
     private void cadastrarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarJButtonActionPerformed
         try {
-        Cliente novoCliente = new Cliente(nomeJTextField.getText(), LocalDate.parse(dataNascJFormattedTextField.getText(), formato), cpfJFormattedTextField.getText(), enderecoJTextField.getText(), emailJTextField.getText());
+            Cliente novoCliente = new Cliente();
+            novoCliente.setNome(nomeJTextField.getText());
+            novoCliente.setCpf(cpfJFormattedTextField.getText());
+            try{
+                novoCliente.setDataNasc(LocalDate.parse(dataNascJFormattedTextField.getText(), formato));
+            }catch (DateTimeParseException e){
+                throw new RuntimeException("Data de nascimento inválida");
+            }
+            novoCliente.setEmail(emailJTextField.getText());
+            novoCliente.setEndereco(enderecoJTextField.getText());
+        
+        
         String idStr = idJTextField.getText();  
             try {
                 int id = Integer.parseInt(idStr);

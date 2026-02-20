@@ -101,7 +101,7 @@ public class LoginJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(entrarJButton, "Usuário ou senha incorretos!");
             }else{
                 tela.logar(user.isAdminPerm(), user.getLogin());
-                Sessao.idLogado = user.getId();
+                Sessao.usuario = user;
                 loginJTextField.setText("");
                 senhaJPasswordField.setText("");
             }}else{

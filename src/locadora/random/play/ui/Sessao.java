@@ -4,11 +4,13 @@
  */
 package locadora.random.play.ui;
 
+import locadora.random.play.Funcionario;
+
 
 /**
  *
  * @author kauan
  */
 public class Sessao {
-    public static int idLogado;
+    public static Funcionario usuario;
 }

@@ -23,7 +23,7 @@ public class Genero extends EntidadeBase{
     }
 
     public void setDescricao(String novaDescricao) {
-        if (novaDescricao.equals("")){
+        if (novaDescricao == null || novaDescricao.isBlank()){
             throw new RuntimeException("Descrição inválida");
         }
         descricao = novaDescricao;

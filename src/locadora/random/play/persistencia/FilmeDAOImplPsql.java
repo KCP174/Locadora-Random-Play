@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.plaf.synth.Region;
 import locadora.random.play.Filme;
 import locadora.random.play.Filme;
 import locadora.random.play.Genero;
@@ -60,7 +61,14 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
         Filme registro = new Filme();
         try {
             if(rs.next()){
-                registro = new Filme(rs.getString("titulo"), rs.getString("autor"), rs.getString("descricao"), rs.getDouble("valor_locacao"), rs.getInt("qntd_estoque"), rs.getInt("duracao"), retornaGeneros(id));
+                registro = new Filme();
+                registro.setTitulo(rs.getString("titulo"));
+                registro.setAutor(rs.getString("autor"));
+                registro.setDescricaoFilme(rs.getString("descricao"));
+                registro.setValorLocacao(rs.getDouble("valor_locacao"));
+                registro.setQntdEstoque(rs.getInt("qntd_estoque"));
+                registro.setDuracao(rs.getInt("duracao"));
+                registro.setGenerosFilme(retornaGeneros(id));
                 registro.setId(rs.getInt("id"));
             }
         }catch (Exception erro){
@@ -122,7 +130,14 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
         
         try {
             while(rs.next()){
-                Filme registro = new Filme(rs.getString("titulo"), rs.getString("autor"), rs.getString("descricao"), rs.getDouble("valor_locacao"), rs.getInt("qntd_estoque"), rs.getInt("duracao"), retornaGeneros(rs.getInt("id")));
+                Filme registro = new Filme();
+                registro.setTitulo(rs.getString("titulo"));
+                registro.setAutor(rs.getString("autor"));
+                registro.setDescricaoFilme(rs.getString("descricao"));
+                registro.setValorLocacao(rs.getDouble("valor_locacao"));
+                registro.setQntdEstoque(rs.getInt("qntd_estoque"));
+                registro.setDuracao(rs.getInt("duracao"));
+                registro.setGenerosFilme(retornaGeneros(rs.getInt("id")));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -151,7 +166,14 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
         
         try {
             while(rs.next()){
-                Filme registro = new Filme(rs.getString("titulo"), rs.getString("autor"), rs.getString("descricao"), rs.getDouble("valor_locacao"), rs.getInt("qntd_estoque"), rs.getInt("duracao"), retornaGeneros(rs.getInt("id")));
+                Filme registro = new Filme();
+                registro.setTitulo(rs.getString("titulo"));
+                registro.setAutor(rs.getString("autor"));
+                registro.setDescricaoFilme(rs.getString("descricao"));
+                registro.setValorLocacao(rs.getDouble("valor_locacao"));
+                registro.setQntdEstoque(rs.getInt("qntd_estoque"));
+                registro.setDuracao(rs.getInt("duracao"));
+                registro.setGenerosFilme(retornaGeneros(rs.getInt("id")));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }
@@ -183,7 +205,14 @@ public class FilmeDAOImplPsql implements IFilmeDAO{
         
         try {
             while(rs.next()){
-                Filme registro = new Filme(rs.getString("titulo"), rs.getString("autor"), rs.getString("descricao"), rs.getDouble("valor_locacao"), rs.getInt("qntd_estoque"), rs.getInt("duracao"), retornaGeneros(rs.getInt("id")));
+                Filme registro = new Filme();
+                registro.setTitulo(rs.getString("titulo"));
+                registro.setAutor(rs.getString("autor"));
+                registro.setDescricaoFilme(rs.getString("descricao"));
+                registro.setValorLocacao(rs.getDouble("valor_locacao"));
+                registro.setQntdEstoque(rs.getInt("qntd_estoque"));
+                registro.setDuracao(rs.getInt("duracao"));
+                registro.setGenerosFilme(retornaGeneros(rs.getInt("id")));
                 registro.setId(rs.getInt("id"));
                 lista.add(registro);
             }

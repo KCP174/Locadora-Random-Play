@@ -10,7 +10,8 @@ package locadora.random.play;
  */
 public class Sql {
 /*
--- Database: random_play
+
+    -- Database: random_play
 
 -- DROP DATABASE IF EXISTS "random_play";
 
@@ -38,11 +39,6 @@ CREATE TABLE IF NOT EXISTS public.cliente
     CONSTRAINT cliente_pkey PRIMARY KEY (id)
 );
 
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.cliente
-    OWNER to postgres;
-
 -- Table: public.filme
 
 -- DROP TABLE IF EXISTS public.filme;
@@ -58,11 +54,6 @@ CREATE TABLE IF NOT EXISTS public.filme
     duracao integer NOT NULL,
     CONSTRAINT filme_pkey PRIMARY KEY (id)
 );
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.filme
-    OWNER to postgres;
 
 -- Table: public.funcionario
 
@@ -80,11 +71,6 @@ CREATE TABLE IF NOT EXISTS public.funcionario
     CONSTRAINT funcionario_pkey PRIMARY KEY (id)
 );
 
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.funcionario
-    OWNER to postgres;
-
 -- Table: public.genero
 
 -- DROP TABLE IF EXISTS public.genero;
@@ -96,11 +82,6 @@ CREATE TABLE IF NOT EXISTS public.genero
     CONSTRAINT genero_pkey PRIMARY KEY (id)
 );
 
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.genero
-    OWNER to postgres;
-
 -- Table: public.generos_filme
 
 -- DROP TABLE IF EXISTS public.generos_filme;
@@ -111,11 +92,6 @@ CREATE TABLE IF NOT EXISTS public.generos_filme
     id_filme integer,
     id_genero integer
 );
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.generos_filme
-    OWNER to postgres;
 
 -- Table: public.itens_locacao
 
@@ -129,11 +105,6 @@ CREATE TABLE IF NOT EXISTS public.itens_locacao
     valor_unitario double precision,
     CONSTRAINT itens_locacao_pkey PRIMARY KEY (id)
 );
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.itens_locacao
-    OWNER to postgres;
 
 -- Table: public.locacao
 
@@ -159,12 +130,8 @@ CREATE TABLE IF NOT EXISTS public.locacao
         ON DELETE NO ACTION
 );
 
-TABLESPACE pg_default;
+INSERT INTO funcionario (nome, login, senha, cpf, admin, data_nascimento) VALUES ('Admin', 'admin', 'admin123', '123.123.123-12', true, '2004-04-04');
 
-ALTER TABLE IF EXISTS public.locacao
-    OWNER to postgres;
-
-
-
+    
 */
 }

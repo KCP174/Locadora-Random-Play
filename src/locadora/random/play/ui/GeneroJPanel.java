@@ -56,6 +56,7 @@ public class GeneroJPanel extends javax.swing.JPanel {
         editarJButton = new javax.swing.JButton();
         idJLabel = new javax.swing.JLabel();
         idJTextField = new javax.swing.JTextField();
+        limparJButton = new javax.swing.JButton();
 
         tituloJLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         tituloJLabel.setText("ADICIONAR NOVO GÊNERO");
@@ -95,6 +96,9 @@ public class GeneroJPanel extends javax.swing.JPanel {
         idJTextField.setEditable(false);
         idJTextField.setEnabled(false);
 
+        limparJButton.setText("Limpar");
+        limparJButton.addActionListener(this::limparJButtonActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,7 +117,9 @@ public class GeneroJPanel extends javax.swing.JPanel {
                         .addComponent(descricaoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(adicionarJButton)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(limparJButton)
+                .addContainerGap(98, Short.MAX_VALUE))
             .addComponent(jScrollPane)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -131,7 +137,8 @@ public class GeneroJPanel extends javax.swing.JPanel {
                     .addComponent(descricaoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(adicionarJButton)
                     .addComponent(idJLabel)
-                    .addComponent(idJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(limparJButton))
                 .addGap(13, 13, 13)
                 .addComponent(editarJButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,8 +173,7 @@ public class GeneroJPanel extends javax.swing.JPanel {
                 banco.inserir(novoGenero);
                 JOptionPane.showMessageDialog(adicionarJButton, "Gênero inserido com sucesso!");
             }
-                descricaoJTextField.setText("");
-                idJTextField.setText("");
+                limparJButtonActionPerformed(evt);
             }} catch(Exception erro) {
             erro.printStackTrace();
             JOptionPane.showMessageDialog(adicionarJButton, erro.getMessage());
@@ -186,6 +192,11 @@ public class GeneroJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_editarJButtonActionPerformed
 
+    private void limparJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparJButtonActionPerformed
+        idJTextField.setText("");
+        descricaoJTextField.setText("");
+    }//GEN-LAST:event_limparJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionarJButton;
@@ -196,6 +207,7 @@ public class GeneroJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel idJLabel;
     private javax.swing.JTextField idJTextField;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JButton limparJButton;
     private javax.swing.JLabel tituloJLabel;
     // End of variables declaration//GEN-END:variables
 }

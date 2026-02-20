@@ -43,10 +43,6 @@ public final class Filme extends EntidadeBase{
         item.setValorLocacao(valorLocacao);
         return item;
     }
-        public void setDescricao(String descricao) {
-        //Verificars fodas
-        this.descricao = descricao;
-    }
 
     public void setGenerosFilme(List<Genero> generosFilme) {
         this.generosFilme = generosFilme;
@@ -100,8 +96,11 @@ public final class Filme extends EntidadeBase{
     }
 
     public void setDescricaoFilme(String descricao) {
-        if (descricao.equals("") || descricao.trim().length() < 5){
+        if (descricao == null || descricao.isBlank()){
             throw new RuntimeException("Descrição inválida");
+        }
+        if (descricao.trim().length() < 5){
+            throw new RuntimeException("Digite uma descricao válida");
         }
         this.descricao = descricao;
     }
@@ -135,7 +134,7 @@ public final class Filme extends EntidadeBase{
     }
 
     public void setTitulo(String novoTitulo) {
-        if (novoTitulo.equals("") || novoTitulo.trim().length() < 5){
+        if (novoTitulo == null || novoTitulo.isBlank()){
             throw new RuntimeException("Titulo inválido");
         }
         titulo = novoTitulo;

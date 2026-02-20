@@ -23,9 +23,9 @@ public class Funcionario extends Pessoa{
         setNome(nome);
         setDataNasc(dataNasc);
         setCpf(cpf);
-        this.login = login;
-        this.senha = senha;
-        this.adminPerm = adminPerm;
+        setLogin(login);
+        setSenha(senha);
+        setAdminPerm(adminPerm);
     }
 
     public boolean isAdminPerm() {
@@ -45,14 +45,14 @@ public class Funcionario extends Pessoa{
     }
 
     public void setLogin(String login) {
-        if (login.equals("") || login.trim().length() < 0){
+        if (login == null || login.isBlank()){
             throw new RuntimeException("Login inválido");
         }
         this.login = login;
     }
 
     public void setSenha(String senha) {
-        if (senha.equals("") || senha.trim().length() < 0){
+        if (senha == null || senha.isBlank()){
             throw new RuntimeException("Senha inválida");
         }
         this.senha = senha;

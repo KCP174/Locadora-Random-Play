@@ -408,17 +408,46 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
     private void cadastrarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarJButtonActionPerformed
         try {
             //conversão
+            Filme novoFilme = new Filme();
+
             String textoValor = valorJTextField.getText();
             textoValor = textoValor.replace(",", ".");
-            double valor = Double.parseDouble(textoValor);
+            double valor;
+            int duracao;
+            int qntd;
             
-            String textoDuracao = duracaoJTextField.getText();
-            int duracao = Integer.parseInt(textoDuracao);
+            try{
+                valor = Double.parseDouble(textoValor);
+            }catch (NumberFormatException e){
+                throw new RuntimeException("Insira um valor válido");
+            }
             
-            String textoQuantidade = qntdJTextField.getText();
-            int qntd = Integer.parseInt(textoQuantidade);
+            try{
+                String textoDuracao = duracaoJTextField.getText();
+                duracao = Integer.parseInt(textoDuracao);
+            }catch (NumberFormatException e){
+                throw new RuntimeException("Insira uma duração válida");
+            }
             
-            Filme novoFilme = new Filme(tituloJTextField.getText(), autorJTextField.getText(), descricaoJTextField.getText(), valor, qntd, duracao, generosSelecionados);
+            try{
+                String textoQuantidade = qntdJTextField.getText();
+                qntd = Integer.parseInt(textoQuantidade);
+            }catch (NumberFormatException e){
+                throw new RuntimeException("Insira uma quantidade válida");
+            }
+            
+            novoFilme.setTitulo(tituloJTextField.getText());
+            novoFilme.setAutor(autorJTextField.getText());
+            novoFilme.setDescricaoFilme(descricaoJTextField.getText());
+            novoFilme.setValorLocacao(valor);
+            novoFilme.setQntdEstoque(qntd);
+            novoFilme.setDuracao(duracao);
+            if(generosSelecionados.isEmpty()){
+                throw new RuntimeException("Filme precisa ter pelo menos 1 gênero");
+            }
+            novoFilme.setGenerosFilme(generosSelecionados);
+            
+            
             String idStr = idJTextField.getText();  
             try {
                 int id = Integer.parseInt(idStr);
@@ -480,23 +509,30 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buscarJButtonActionPerformed
 
     private void adicionarGeneroJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarGeneroJButtonActionPerformed
-        try{
-            adicionaGenero(listaGeneros.get(generosJComboBox.getSelectedIndex()));
-            mostraGeneros();    
-        } catch (Exception erro){
-            erro.printStackTrace();
-            JOptionPane.showMessageDialog(cadastrarJButton, erro.getMessage());
+        if(!listaGeneros.isEmpty()){
+            try{
+                adicionaGenero(listaGeneros.get(generosJComboBox.getSelectedIndex()));
+                mostraGeneros();    
+            } catch (Exception erro){
+                erro.printStackTrace();
+                JOptionPane.showMessageDialog(cadastrarJButton, erro.getMessage());
+            }
+        }else{                
+            JOptionPane.showMessageDialog(cadastrarJButton, "Não há gêneros cadastrados!");
         }
-        
     }//GEN-LAST:event_adicionarGeneroJButtonActionPerformed
 
     private void removerGeneroJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerGeneroJButtonActionPerformed
-        try{
-            removeGenero(listaGeneros.get(generosJComboBox.getSelectedIndex()));
-            mostraGeneros();    
-        } catch (Exception erro){
-            erro.printStackTrace();
-            JOptionPane.showMessageDialog(cadastrarJButton, erro.getMessage());
+        if(!listaGeneros.isEmpty()){
+            try{
+                removeGenero(listaGeneros.get(generosJComboBox.getSelectedIndex()));
+                mostraGeneros();    
+            } catch (Exception erro){
+                erro.printStackTrace();
+                JOptionPane.showMessageDialog(cadastrarJButton, erro.getMessage());
+            }
+        }else{                
+            JOptionPane.showMessageDialog(cadastrarJButton, "Não há gêneros cadastrados!");
         }
     }//GEN-LAST:event_removerGeneroJButtonActionPerformed
 
@@ -516,7 +552,7 @@ public class CadastraFilmeJPanel extends javax.swing.JPanel {
             mostraGeneros();
             
         } else{
-            JOptionPane.showMessageDialog(editarJButton, "Selecione 1 cliente!");
+            JOptionPane.showMessageDialog(editarJButton, "Selecione 1 Filme!");
         }
     }//GEN-LAST:event_editarJButtonActionPerformed
 

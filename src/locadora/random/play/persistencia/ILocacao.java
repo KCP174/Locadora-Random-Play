@@ -29,4 +29,6 @@ public interface ILocacao {
     public List<Locacao> consultarLocacoesLimitado(int n);
     
     public void remover(Locacao locacao);
+    
+    public void devolver(int idLocacao);
 }

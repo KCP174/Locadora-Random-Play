@@ -58,8 +58,11 @@ public class Cliente extends Pessoa{
     }
 
     public final void setEndereco(String endereco) {
-        if(endereco == null){
+        if(endereco == null || endereco.isBlank()){
             throw new RuntimeException("endereco é obrigatório");
+        } 
+        if (endereco.trim().length() < 5){
+            throw new RuntimeException("Digite um endereço válido");
         }
         this.endereco = endereco;
     }
